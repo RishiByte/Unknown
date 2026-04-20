@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>L'Atelier | Culinary Management</title>
+    <meta name="description" content="L'Atelier — Executive culinary management platform with AI recipe generation, weekly planning, inventory control, and performance analytics.">
 
     <!-- React & ReactDOM -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
@@ -21,7 +22,6 @@
                 extend: {
                     colors: {
                         charcoal: { DEFAULT: '#1a1a1a', light: '#2a2a2a', dark: '#0f0f0f' },
-                        cream: { DEFAULT: '#f5f1e8', dark: '#e6ded1' },
                         gold: { light: '#e8c962', DEFAULT: '#d4af37', dark: '#b08d27' }
                     },
                     fontFamily: {
@@ -29,58 +29,47 @@
                         serif: ['Playfair Display', 'serif'],
                     },
                     animation: {
-                        'fade-in': 'fadeIn 0.8s ease-out forwards',
-                        'slide-up': 'slideUp 0.8s ease-out forwards',
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'slide-up': 'slideUp 0.5s ease-out forwards',
                     },
                     keyframes: {
                         fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
-                        slideUp: { '0%': { transform: 'translateY(20px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } }
+                        slideUp: { '0%': { transform: 'translateY(16px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } }
                     }
                 }
             }
         }
     </script>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        * { box-sizing: border-box; }
         body {
-            background-color: #f5f1e8;
-            color: #1a1a1a;
+            background-color: #111111;
+            color: #e8e4dc;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            font-family: 'Inter', sans-serif;
         }
-
         .glass-nav {
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            background: rgba(17, 17, 17, 0.97);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.12);
         }
-
-        .glass-card {
-            background: white;
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        .card {
+            background: #1e1e1e;
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 14px;
+            transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
         }
-
-        .glass-card-no-hover {
-            background: white;
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        .card:hover { border-color: rgba(212,175,55,0.35); }
+        .card-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 32px rgba(0,0,0,0.4);
         }
-
-        .hover-lift:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 25px -5px rgba(212, 175, 55, 0.15), 0 8px 10px -6px rgba(212, 175, 55, 0.1);
-            border-color: rgba(212, 175, 55, 0.4);
-        }
-
         .gold-gradient-text {
             background: linear-gradient(135deg, #d4af37, #f3e5ab, #d4af37);
             -webkit-background-clip: text;
@@ -89,55 +78,54 @@
             background-size: 200% auto;
             animation: shine 5s linear infinite;
         }
-
-        @keyframes shine {
-            to {
-                background-position: 200% center;
-            }
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f5f1e8;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #d4af37;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #b08d27;
-        }
-
-        input:focus,
-        textarea:focus,
-        select:focus {
+        @keyframes shine { to { background-position: 200% center; } }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #111; }
+        ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #b08d27; }
+        input:focus, textarea:focus, select:focus {
             outline: none;
             box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
-            border-color: #d4af37;
+            border-color: #d4af37 !important;
         }
-
         .spinner {
-            border: 4px solid rgba(212, 175, 55, 0.3);
+            border: 3px solid rgba(212, 175, 55, 0.2);
             border-radius: 50%;
-            border-top: 4px solid #d4af37;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
+            border-top: 3px solid #d4af37;
+            width: 28px; height: 28px;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Bar chart animation */
+        .bar-fill {
+            animation: growBar 1s cubic-bezier(0.4,0,0.2,1) forwards;
+            transform-origin: bottom;
+        }
+        @keyframes growBar {
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
         }
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 24px; right: 24px;
+            background: #1e1e1e;
+            border: 1px solid rgba(212,175,55,0.4);
+            color: #e8e4dc;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            z-index: 9999;
+            animation: toastIn 0.3s ease forwards;
+            max-width: 320px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        }
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -146,97 +134,95 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect, useCallback, useMemo, createContext, useContext } = React;
+        const { useState, useEffect, useCallback, useRef, createContext, useContext } = React;
 
-        // --- HOOKS ---
+        /* ── HOOKS ─────────────────────────────────────────── */
         function useDebounce(value, delay) {
-            const [debouncedValue, setDebouncedValue] = useState(value);
+            const [dv, setDv] = useState(value);
             useEffect(() => {
-                const handler = setTimeout(() => { setDebouncedValue(value); }, delay);
-                return () => clearTimeout(handler);
+                const h = setTimeout(() => setDv(value), delay);
+                return () => clearTimeout(h);
             }, [value, delay]);
-            return debouncedValue;
+            return dv;
         }
 
-        function useLocalStorage(key, initialValue) {
-            const [storedValue, setStoredValue] = useState(() => {
-                try {
-                    const item = window.localStorage.getItem(key);
-                    return item ? JSON.parse(item) : initialValue;
-                } catch (error) {
-                    console.error("Local storage error", error);
-                    return initialValue;
-                }
+        function useLocalStorage(key, init) {
+            const [val, setVal] = useState(() => {
+                try { const i = localStorage.getItem(key); return i ? JSON.parse(i) : init; }
+                catch { return init; }
             });
-            const setValue = (value) => {
+            const set = v => {
                 try {
-                    const valueToStore = value instanceof Function ? value(storedValue) : value;
-                    setStoredValue(valueToStore);
-                    window.localStorage.setItem(key, JSON.stringify(valueToStore));
-                } catch (error) {
-                    console.error("Local storage set error", error);
-                }
+                    const s = v instanceof Function ? v(val) : v;
+                    setVal(s);
+                    localStorage.setItem(key, JSON.stringify(s));
+                } catch {}
             };
-            return [storedValue, setValue];
+            return [val, set];
         }
 
-        // --- UTILS ---
-        const getIngredients = (meal) => {
-            let ing = [];
+        /* ── UTILS ─────────────────────────────────────────── */
+        const getIngredients = meal => {
+            const ing = [];
             for (let i = 1; i <= 20; i++) {
-                if (meal[`strIngredient${i}`] && meal[`strIngredient${i}`].trim() !== '') {
-                    ing.push({ name: meal[`strIngredient${i}`], measure: meal[`strMeasure${i}`] });
+                if (meal[`strIngredient${i}`]?.trim()) {
+                    ing.push({ name: meal[`strIngredient${i}`], measure: meal[`strMeasure${i}`] || '' });
                 }
             }
             return ing;
         };
 
-        const generateMockStats = (id) => {
-            const numericId = parseInt(id) || 12345;
+        const mockStats = id => {
+            const n = parseInt(id) || 12345;
             return {
-                difficulty: numericId % 3 === 0 ? 'Hard' : numericId % 2 === 0 ? 'Medium' : 'Easy',
-                calories: (numericId % 600) + 300, // 300-900 kcal
-                prepTime: (numericId % 45) + 15 // 15-60 mins
+                difficulty: n % 3 === 0 ? 'Hard' : n % 2 === 0 ? 'Medium' : 'Easy',
+                calories: (n % 600) + 300,
+                prepTime: (n % 45) + 15
             };
         };
 
-        // --- CONTEXT ---
+        /* ── CONTEXT ───────────────────────────────────────── */
         const AppContext = createContext();
 
-        // --- COMPONENTS ---
+        /* ── TOAST ─────────────────────────────────────────── */
+        const Toast = ({ message, onDone }) => {
+            useEffect(() => { const t = setTimeout(onDone, 2800); return () => clearTimeout(t); }, []);
+            return <div className="toast"><i className="fa-solid fa-check-circle text-gold mr-2"></i>{message}</div>;
+        };
 
+        /* ── LOADING SCREEN ────────────────────────────────── */
         const LoadingScreen = () => (
-            <div className="fixed inset-0 bg-charcoal z-50 flex flex-col items-center justify-center">
-                <i className="fa-solid fa-utensils text-gold text-4xl animate-bounce mb-6"></i>
-                <h2 className="font-serif text-3xl gold-gradient-text tracking-wider">L'Atelier</h2>
-                <div className="mt-8 w-48 h-1 bg-charcoal-light rounded-full overflow-hidden">
-                    <div className="h-full bg-gold animate-pulse-slow w-full origin-left" style={{ animationDuration: '1.5s' }}></div>
+            <div className="fixed inset-0 bg-[#111] z-50 flex flex-col items-center justify-center gap-6">
+                <i className="fa-solid fa-utensils text-gold text-4xl animate-bounce"></i>
+                <h2 className="font-serif text-3xl gold-gradient-text tracking-widest">L'ATELIER</h2>
+                <div className="w-48 h-0.5 bg-[#2a2a2a] rounded-full overflow-hidden">
+                    <div className="h-full bg-gold w-full animate-pulse origin-left"></div>
                 </div>
             </div>
         );
 
-        const Header = ({ currentView, setCurrentView }) => (
-            <header className="fixed top-0 left-0 right-0 z-40 glass-nav animate-fade-in text-white">
+        /* ── HEADER ────────────────────────────────────────── */
+        const Header = ({ current, nav }) => (
+            <header className="fixed top-0 left-0 right-0 z-40 glass-nav text-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between items-center h-20">
-                        <div className="flex items-center gap-3 cursor-pointer group" onClick={() => setCurrentView('dashboard')}>
-                            <i className="fa-solid fa-bell-concierge text-gold text-2xl group-hover:rotate-12 transition-transform duration-300"></i>
-                            <span className="font-serif text-2xl tracking-widest font-semibold hidden sm:block">L'ATELIER</span>
+                    <div className="flex justify-between items-center h-[68px]">
+                        <div className="flex items-center gap-3 cursor-pointer group" onClick={() => nav('dashboard')}>
+                            <i className="fa-solid fa-bell-concierge text-gold text-xl group-hover:rotate-12 transition-transform duration-300"></i>
+                            <span className="font-serif text-xl tracking-widest font-semibold hidden sm:block">L'ATELIER</span>
                         </div>
-                        <nav className="hidden md:flex items-center gap-8 font-sans text-sm tracking-wide">
-                            <button onClick={() => setCurrentView('dashboard')} className={`${currentView === 'dashboard' ? 'text-gold border-b-2 border-gold' : 'text-gray-300 hover:text-gold'} pb-1 transition-all`}>Dashboard</button>
-                            <button onClick={() => setCurrentView('generator')} className={`${currentView === 'generator' ? 'text-gold border-b-2 border-gold' : 'text-gray-300 hover:text-gold'} pb-1 transition-all`}>AI Generator</button>
-                            <button onClick={() => setCurrentView('menu')} className={`${currentView === 'menu' ? 'text-gold border-b-2 border-gold' : 'text-gray-300 hover:text-gold'} pb-1 transition-all`}>Menu</button>
-                            <button onClick={() => setCurrentView('inventory')} className={`${currentView === 'inventory' ? 'text-gold border-b-2 border-gold' : 'text-gray-300 hover:text-gold'} pb-1 transition-all`}>Inventory</button>
-                            <button onClick={() => setCurrentView('optimizer')} className={`${currentView === 'optimizer' ? 'text-gold border-b-2 border-gold' : 'text-gray-300 hover:text-gold'} pb-1 transition-all`}>Optimizer</button>
+                        <nav className="hidden md:flex items-center gap-6 text-sm">
+                            {['dashboard','planner','generator','menu','inventory','optimizer','analytics'].map(v => (
+                                <button key={v} onClick={() => nav(v)}
+                                    className={`pb-0.5 capitalize transition-all ${current === v ? 'text-gold border-b border-gold' : 'text-gray-400 hover:text-white'}`}>
+                                    {v === 'generator' ? 'AI Generator' : v.charAt(0).toUpperCase() + v.slice(1)}
+                                </button>
+                            ))}
                         </nav>
-                        <div className="flex items-center gap-6">
-                            <div className="flex items-center gap-3 cursor-pointer pl-4 lg:border-l border-gray-700">
-                                <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Chef&backgroundColor=d4af37" alt="Chef Profile" className="w-9 h-9 rounded-full border-2 border-gold object-cover" />
-                                <div className="hidden sm:block">
-                                    <p className="text-sm font-medium">Chef Auguste</p>
-                                    <p className="text-xs text-gray-400">Executive Chef</p>
-                                </div>
+                        <div className="flex items-center gap-3 border-l border-gray-800 pl-4">
+                            <img src="https://api.dicebear.com/7.x/notionists/svg?seed=ChefAuguste&backgroundColor=d4af37" alt="Chef" className="w-8 h-8 rounded-full border border-gold/50" />
+                            <div className="hidden sm:block">
+                                <p className="text-sm font-medium leading-none">Chef Auguste</p>
+                                <p className="text-[11px] text-gray-500 mt-0.5">Executive Chef</p>
                             </div>
                         </div>
                     </div>
@@ -244,280 +230,333 @@
             </header>
         );
 
-        /* --- Reusable Components --- */
-        const RecipeCard = ({ meal, actions = [], showNutrition = false, targetCalories = null }) => {
-            const stats = generateMockStats(meal.idMeal);
-            const ingredients = getIngredients(meal);
-
-            // Score calc for optimizer
-            let score = 0;
-            if (targetCalories) {
-                const diff = Math.abs(stats.calories - targetCalories);
-                score = Math.max(0, 100 - (diff / targetCalories) * 100).toFixed(0);
-            }
-
+        /* ── RECIPE MODAL ──────────────────────────────────── */
+        const RecipeModal = () => {
+            const { viewMeal, setViewMeal } = useContext(AppContext);
+            if (!viewMeal) return null;
+            const ings = getIngredients(viewMeal);
+            const stats = mockStats(viewMeal.idMeal);
             return (
-                <div className="glass-card-no-hover hover-lift rounded-2xl overflow-hidden group flex flex-col h-full relative">
-                    {targetCalories && (
-                        <div className={`absolute top-4 right-4 z-20 px-3 py-1 rounded-full text-xs font-bold text-white shadow-lg ${score > 80 ? 'bg-green-500' : score > 50 ? 'bg-yellow-500' : 'bg-red-500'}`}>
-                            {score}% Match
-                        </div>
-                    )}
-                    <div className="h-48 overflow-hidden relative">
-                        <div className="absolute inset-0 bg-charcoal/30 z-10 transition-colors group-hover:bg-transparent"></div>
-                        <img src={meal.strMealThumb} alt={meal.strMeal} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out" />
-                        <div className="absolute bottom-4 left-4 z-20 flex gap-2">
-                            <span className="px-2 py-1 bg-black/60 backdrop-blur rounded text-xs text-white font-medium shadow-md">
-                                {stats.difficulty}
-                            </span>
-                            <span className="px-2 py-1 bg-black/60 backdrop-blur rounded text-xs text-gold font-medium shadow-md">
-                                <i className="fa-regular fa-clock mr-1"></i>{stats.prepTime}m
-                            </span>
-                        </div>
-                    </div>
-                    <div className="p-5 flex flex-col flex-grow bg-white">
-                        <h4 className="font-serif text-xl font-bold text-charcoal mb-2 line-clamp-1">{meal.strMeal}</h4>
-                        <p className="text-xs text-gold font-medium mb-3 uppercase tracking-wider">{meal.strCategory} &bull; {meal.strArea}</p>
-
-                        {showNutrition && (
-                            <div className="mb-4 grid grid-cols-2 gap-2 text-xs border-y border-gray-100 py-3">
-                                <div><span className="text-gray-500 block">Calories</span><span className="font-bold text-charcoal">{stats.calories} kcal</span></div>
-                                <div><span className="text-gray-500 block">Est. Yield</span><span className="font-bold text-charcoal">4 Servings</span></div>
-                            </div>
-                        )}
-
-                        <div className="mt-auto pt-4 flex flex-wrap gap-2">
-                            {actions.map((action, idx) => (
-                                <button key={idx} onClick={() => action.onClick(meal)} className={`flex-1 min-w-[120px] py-2 px-3 rounded-lg text-sm font-semibold transition-all ${action.primary ? 'bg-charcoal text-gold hover:bg-black' : 'bg-cream text-charcoal hover:bg-gold/20'}`}>
-                                    <i className={`${action.icon} mr-2`}></i>{action.label}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            )
-        };
-
-        /* --- View: Dashboard --- */
-        const DashboardView = ({ setCurrentView }) => {
-            const { inventory, savedRecipes, feedbacks } = useContext(AppContext);
-
-            // Calculate fake efficiency trend based on saved recipes
-            const efficiency = Math.min(100, 80 + savedRecipes.length * 2);
-
-            // Aggregate feedback
-            const avgRating = Object.values(feedbacks).length > 0
-                ? (Object.values(feedbacks).reduce((acc, curr) => acc + curr.rating, 0) / Object.values(feedbacks).length).toFixed(1)
-                : 'N/A';
-
-            return (
-                <div className="animate-fade-in">
-                    <div className="mb-12">
-                        <h1 className="font-serif text-4xl md:text-5xl font-bold text-charcoal mb-4">
-                            Good Evening, <span className="gold-gradient-text italic">Chef Auguste.</span>
-                        </h1>
-                        <p className="text-gray-600 max-w-2xl text-lg font-light">
-                            The dinner service approaches. Your kitchen is primed, inventory is stable, and new AI-optimized seasonal recipes await your review.
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                        <div className="glass-card rounded-2xl p-6 flex flex-col justify-between animate-slide-up" style={{ animationDelay: '0.1s' }}>
-                            <div className="flex justify-between items-start">
-                                <div>
-                                    <p className="text-sm text-gray-500 font-medium mb-1 uppercase">Active Inventory</p>
-                                    <h3 className="font-serif text-3xl font-bold text-charcoal">{inventory.length} Items</h3>
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm" onClick={() => setViewMeal(null)}>
+                    <div className="bg-[#181818] rounded-2xl w-full max-w-3xl max-h-[92vh] overflow-y-auto border border-gray-700/40 shadow-2xl" onClick={e => e.stopPropagation()}>
+                        {/* Header */}
+                        <div className="sticky top-0 bg-[#181818]/95 backdrop-blur p-5 border-b border-gray-800 flex justify-between items-center z-10">
+                            <div>
+                                <h3 className="font-serif text-2xl text-white font-bold leading-tight">{viewMeal.strMeal}</h3>
+                                <div className="flex gap-2 mt-2">
+                                    <span className="bg-gold text-black px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest">{viewMeal.strCategory}</span>
+                                    <span className="bg-[#2a2a2a] text-gold px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest border border-gold/25">{viewMeal.strArea}</span>
                                 </div>
-                                <div className="p-3 bg-cream rounded-full border border-gold/30"><i className="fa-solid fa-boxes-stacked text-gold"></i></div>
                             </div>
+                            <button onClick={() => setViewMeal(null)} className="text-gray-500 hover:text-red-400 transition-colors ml-4 text-xl">
+                                <i className="fa-solid fa-xmark"></i>
+                            </button>
                         </div>
-                        <div className="glass-card rounded-2xl p-6 flex flex-col justify-between animate-slide-up" style={{ animationDelay: '0.2s' }}>
-                            <div className="flex justify-between items-start">
-                                <div>
-                                    <p className="text-sm text-gray-500 font-medium mb-1 uppercase">Saved Recipes</p>
-                                    <h3 className="font-serif text-3xl font-bold text-charcoal">{savedRecipes.length}</h3>
+
+                        <div className="p-6">
+                            {/* Image + quick stats */}
+                            <div className="relative rounded-xl overflow-hidden mb-8">
+                                <img src={viewMeal.strMealThumb} className="w-full h-72 object-cover" alt={viewMeal.strMeal} />
+                                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 flex gap-4">
+                                    <span className="text-white text-xs font-bold bg-black/50 px-3 py-1.5 rounded-full"><i className="fa-regular fa-clock mr-1 text-gold"></i>{stats.prepTime} min</span>
+                                    <span className="text-white text-xs font-bold bg-black/50 px-3 py-1.5 rounded-full"><i className="fa-solid fa-fire mr-1 text-gold"></i>{stats.calories} kcal</span>
+                                    <span className="text-white text-xs font-bold bg-black/50 px-3 py-1.5 rounded-full"><i className="fa-solid fa-signal mr-1 text-gold"></i>{stats.difficulty}</span>
                                 </div>
-                                <div className="p-3 bg-cream rounded-full border border-gold/30"><i className="fa-solid fa-book-open text-gold"></i></div>
                             </div>
-                        </div>
-                        <div className="glass-card rounded-2xl p-6 flex flex-col justify-between animate-slide-up" style={{ animationDelay: '0.3s' }}>
-                            <div className="flex justify-between items-start">
-                                <div>
-                                    <p className="text-sm text-gray-500 font-medium mb-1 uppercase">Avg Feedback</p>
-                                    <h3 className="font-serif text-3xl font-bold text-charcoal"><i className="fa-solid fa-star text-gold text-2xl mr-2"></i>{avgRating}</h3>
-                                </div>
-                                <div className="p-3 bg-cream rounded-full border border-gold/30"><i className="fa-solid fa-comment-dots text-gold"></i></div>
-                            </div>
-                        </div>
-                        <div className="glass-card rounded-2xl p-6 flex flex-col justify-between animate-slide-up" style={{ animationDelay: '0.4s' }}>
-                            <div className="flex justify-between items-start">
-                                <div>
-                                    <p className="text-sm text-gray-500 font-medium mb-1 uppercase">Resource Effic.</p>
-                                    <h3 className="font-serif text-3xl font-bold text-charcoal">{efficiency}%</h3>
-                                </div>
-                                <div className="p-3 bg-cream rounded-full border border-gold/30"><i className="fa-solid fa-chart-pie text-gold"></i></div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div className="flex justify-between items-end mb-8 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-                        <h2 className="font-serif text-2xl text-charcoal font-semibold border-l-4 border-gold pl-4">Core Stations</h2>
-                    </div>
+                            {/* Ingredients */}
+                            <h4 className="font-serif text-lg font-bold text-white mb-4 flex items-center gap-2">
+                                <span className="w-1 h-5 bg-gold rounded-full inline-block"></span>
+                                Ingredients Needed
+                                <span className="ml-2 text-xs text-gray-500 font-sans font-normal">({ings.length} items)</span>
+                            </h4>
+                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-8">
+                                {ings.map((ing, i) => (
+                                    <li key={i} className="flex justify-between items-center bg-[#242424] px-4 py-2.5 rounded-lg text-sm border border-gray-800">
+                                        <span className="font-semibold text-white">{ing.name}</span>
+                                        <span className="text-gray-400 text-xs ml-2">{ing.measure}</span>
+                                    </li>
+                                ))}
+                            </ul>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                        <div onClick={() => setCurrentView('generator')} className="glass-card rounded-2xl overflow-hidden group hover-lift cursor-pointer flex flex-col animate-slide-up" style={{ animationDelay: '0.6s' }}>
-                            <div className="h-40 relative bg-charcoal">
-                                <img src="https://images.unsplash.com/photo-1577106263724-2c8e03bfe9cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
-                                <div className="absolute top-4 left-4 z-20 w-10 h-10 rounded-full bg-white flex items-center justify-center"><i className="fa-solid fa-wand-magic-sparkles text-gold"></i></div>
+                            {/* Instructions */}
+                            <h4 className="font-serif text-lg font-bold text-white mb-4 flex items-center gap-2">
+                                <span className="w-1 h-5 bg-gold rounded-full inline-block"></span>
+                                Step-by-Step Instructions
+                            </h4>
+                            <div className="text-sm text-gray-300 leading-8 whitespace-pre-wrap bg-[#151515] p-6 rounded-xl border border-gray-800">
+                                {viewMeal.strInstructions}
                             </div>
-                            <div className="p-6 bg-white flex-1">
-                                <h4 className="font-serif text-xl font-bold text-charcoal mb-2 group-hover:text-gold transition-colors">AI Recipe Generator</h4>
-                                <p className="text-sm text-gray-600">Search MealDB variants based on your inspiration and improvise ingredients.</p>
-                            </div>
-                        </div>
 
-                        <div onClick={() => setCurrentView('menu')} className="glass-card rounded-2xl overflow-hidden group hover-lift cursor-pointer flex flex-col animate-slide-up" style={{ animationDelay: '0.7s' }}>
-                            <div className="h-40 relative bg-charcoal">
-                                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
-                                <div className="absolute top-4 left-4 z-20 w-10 h-10 rounded-full bg-white flex items-center justify-center"><i className="fa-solid fa-layer-group text-gold"></i></div>
-                            </div>
-                            <div className="p-6 bg-white flex-1">
-                                <h4 className="font-serif text-xl font-bold text-charcoal mb-2 group-hover:text-gold transition-colors">Digital Menu & Feedback</h4>
-                                <p className="text-sm text-gray-600">Review selected dishes, gather guest ratings and manage overall menu appeal.</p>
-                            </div>
-                        </div>
-
-                        <div onClick={() => setCurrentView('inventory')} className="glass-card rounded-2xl overflow-hidden group hover-lift cursor-pointer flex flex-col animate-slide-up" style={{ animationDelay: '0.8s' }}>
-                            <div className="h-40 relative bg-charcoal">
-                                <img src="https://images.unsplash.com/photo-1589010588553-46e8e7c21788?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
-                                <div className="absolute top-4 left-4 z-20 w-10 h-10 rounded-full bg-white flex items-center justify-center"><i className="fa-solid fa-box-open text-gold"></i></div>
-                            </div>
-                            <div className="p-6 bg-white flex-1">
-                                <h4 className="font-serif text-xl font-bold text-charcoal mb-2 group-hover:text-gold transition-colors">Smart Kitchen Inventory</h4>
-                                <p className="text-sm text-gray-600">Manage real-time supplies, mark items low and trigger recipe auto-suggestions.</p>
-                            </div>
-                        </div>
-
-                        <div onClick={() => setCurrentView('optimizer')} className="glass-card rounded-2xl overflow-hidden group hover-lift cursor-pointer flex flex-col animate-slide-up" style={{ animationDelay: '0.9s' }}>
-                            <div className="h-40 relative bg-charcoal">
-                                <img src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
-                                <div className="absolute top-4 left-4 z-20 w-10 h-10 rounded-full bg-white flex items-center justify-center"><i className="fa-solid fa-scale-balanced text-gold"></i></div>
-                            </div>
-                            <div className="p-6 bg-white flex-1">
-                                <h4 className="font-serif text-xl font-bold text-charcoal mb-2 group-hover:text-gold transition-colors">Recipe Optimizer</h4>
-                                <p className="text-sm text-gray-600">Filter dishes tightly against nutritional targets to secure highest margin variants.</p>
-                            </div>
+                            {/* YouTube */}
+                            {viewMeal.strYoutube && (
+                                <a href={viewMeal.strYoutube} target="_blank" rel="noreferrer"
+                                    className="mt-6 w-full flex items-center justify-center gap-2 bg-red-600/80 hover:bg-red-600 text-white font-bold py-3 rounded-xl transition-colors">
+                                    <i className="fa-brands fa-youtube text-lg"></i> Watch on YouTube
+                                </a>
+                            )}
                         </div>
                     </div>
                 </div>
             );
         };
 
-        /* --- View: AI Generator --- */
-        const AIGeneratorView = () => {
-            const { savedRecipes, setSavedRecipes } = useContext(AppContext);
-            const [query, setQuery] = useState('');
-            const debouncedQuery = useDebounce(query, 600);
-            const [results, setResults] = useState([]);
-            const [loading, setLoading] = useState(false);
-            const [improviseMode, setImproviseMode] = useState(null);
-            const [viewMeal, setViewMeal] = useState(null);
+        /* ── RECIPE CARD ───────────────────────────────────── */
+        const RecipeCard = ({ meal, actions = [], showNutrition = false, targetCalories = null }) => {
+            const stats = mockStats(meal.idMeal);
+            let score = null;
+            if (targetCalories) {
+                const diff = Math.abs(stats.calories - targetCalories);
+                score = Math.max(0, 100 - (diff / targetCalories) * 100).toFixed(0);
+            }
+            return (
+                <div className="card card-lift overflow-hidden flex flex-col h-full relative">
+                    {score !== null && (
+                        <div className={`absolute top-3 right-3 z-20 px-2.5 py-0.5 rounded-full text-[11px] font-bold text-white shadow ${score > 80 ? 'bg-green-600' : score > 50 ? 'bg-yellow-600' : 'bg-red-600'}`}>
+                            {score}% Match
+                        </div>
+                    )}
+                    <div className="h-44 overflow-hidden relative">
+                        <div className="absolute inset-0 bg-black/20 z-10 group-hover:bg-transparent transition-colors"></div>
+                        <img src={meal.strMealThumb} alt={meal.strMeal} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                        <div className="absolute bottom-3 left-3 z-20 flex gap-1.5">
+                            <span className="px-2 py-0.5 bg-black/65 rounded text-[11px] text-white font-medium">{stats.difficulty}</span>
+                            <span className="px-2 py-0.5 bg-black/65 rounded text-[11px] text-gold font-medium">
+                                <i className="fa-regular fa-clock mr-1"></i>{stats.prepTime}m
+                            </span>
+                        </div>
+                    </div>
+                    <div className="p-4 flex flex-col flex-grow">
+                        <h4 className="font-serif text-lg font-bold text-white mb-1 leading-snug line-clamp-1">{meal.strMeal}</h4>
+                        <p className="text-[11px] text-gold font-semibold mb-3 uppercase tracking-widest">{meal.strCategory} · {meal.strArea}</p>
+                        {showNutrition && (
+                            <div className="mb-3 grid grid-cols-2 gap-2 text-xs border-y border-gray-800 py-3">
+                                <div><span className="text-gray-500 block">Est. Calories</span><span className="font-bold text-white">{stats.calories} kcal</span></div>
+                                <div><span className="text-gray-500 block">Est. Yield</span><span className="font-bold text-white">4 Servings</span></div>
+                            </div>
+                        )}
+                        <div className="mt-auto pt-3 flex flex-wrap gap-2">
+                            {actions.map((a, i) => (
+                                <button key={i} onClick={() => a.onClick(meal)}
+                                    className={`flex-1 min-w-0 py-2 px-2 rounded-lg text-xs font-bold transition-all ${a.primary ? 'bg-gold text-black hover:bg-yellow-400' : 'bg-[#2a2a2a] text-white hover:bg-[#333] border border-gray-700'}`}>
+                                    <i className={`${a.icon} mr-1`}></i>{a.label}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        /* ═══════════════════════════════════════════════════
+           VIEW: DASHBOARD
+        ═══════════════════════════════════════════════════ */
+        const DashboardView = ({ nav }) => {
+            const { inventory, savedRecipes, feedbacks, improvisedMeals, setViewMeal } = useContext(AppContext);
+            const [bestMatch, setBestMatch] = useState(null);
+            const [trending, setTrending] = useState(null);
+
+            const avgRating = Object.values(feedbacks).length > 0
+                ? (Object.values(feedbacks).reduce((a, c) => a + c.rating, 0) / Object.values(feedbacks).length).toFixed(1)
+                : 'N/A';
 
             useEffect(() => {
-                if (!debouncedQuery) { setResults([]); return; }
-                const fetchRecipes = async () => {
-                    setLoading(true);
-                    try {
-                        const res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${debouncedQuery}`);
-                        const data = await res.json();
-                        setResults((data.meals || []).slice(0, 3)); // Show 3 variants
-                    } catch (e) {
-                        console.error('Failed to fetch recipes', e);
-                    }
-                    setLoading(false);
-                };
-                fetchRecipes();
-            }, [debouncedQuery]);
+                fetch('https://www.themealdb.com/api/json/v1/1/lookup.php?i=52795')
+                    .then(r => r.json()).then(d => d.meals && setBestMatch(d.meals[0]));
+                fetch('https://www.themealdb.com/api/json/v1/1/lookup.php?i=52854')
+                    .then(r => r.json()).then(d => d.meals && setTrending(d.meals[0]));
+            }, []);
 
-            const handleSave = (meal) => {
+            const modules = [
+                { label: 'Planner', view: 'planner', icon: 'fa-calendar-week' },
+                { label: 'AI Generator', view: 'generator', icon: 'fa-wand-magic-sparkles' },
+                { label: 'Menu', view: 'menu', icon: 'fa-layer-group' },
+                { label: 'Inventory', view: 'inventory', icon: 'fa-box-open' },
+                { label: 'Optimizer', view: 'optimizer', icon: 'fa-scale-balanced' },
+                { label: 'Analytics', view: 'analytics', icon: 'fa-chart-column' },
+            ];
+
+            return (
+                <div className="animate-fade-in text-white pt-2">
+                    {/* Greeting */}
+                    <div className="mb-10">
+                        <h1 className="font-serif text-3xl md:text-4xl font-bold mb-1">
+                            Good Evening, <span className="gold-gradient-text italic">Chef Auguste.</span>
+                        </h1>
+                        <p className="text-gray-500 text-sm">The kitchen awaits. Your smart recommendations are ready.</p>
+                    </div>
+
+                    {/* Stats row */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+                        {[
+                            { label: 'Inventory', value: inventory.length, icon: 'fa-boxes-stacked' },
+                            { label: 'Saved Recipes', value: savedRecipes.length, icon: 'fa-book-open' },
+                            { label: 'Avg Rating', value: avgRating === 'N/A' ? avgRating : `★ ${avgRating}`, icon: 'fa-star' },
+                            { label: 'Improvised', value: improvisedMeals.length, icon: 'fa-lightbulb' },
+                        ].map((s, i) => (
+                            <div key={i} className="card p-5">
+                                <p className="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-3">{s.label}</p>
+                                <div className="flex items-center justify-between">
+                                    <h3 className="text-2xl font-bold text-white">{s.value}</h3>
+                                    <i className={`fa-solid ${s.icon} text-gold/60 text-lg`}></i>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Hero cards */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
+                        {/* Today's best match */}
+                        <div className="card p-5 flex flex-col relative min-h-[190px]">
+                            <div className="absolute top-4 right-4 bg-gold text-black text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-widest">Top Pattern</div>
+                            <h2 className="font-serif text-lg font-bold mb-1">Today's Best Match</h2>
+                            <p className="text-[11px] text-gray-500 mb-5">Based on highest rated recipes and your current inventory.</p>
+                            {bestMatch ? (
+                                <div onClick={() => setViewMeal(bestMatch)} className="mt-auto flex items-center gap-4 cursor-pointer hover:bg-white/5 p-2 -ml-2 rounded-xl transition-colors pr-4">
+                                    <img src={bestMatch.strMealThumb} className="w-14 h-14 rounded-lg object-cover shadow" />
+                                    <div>
+                                        <h3 className="font-bold text-white text-sm hover:text-gold transition-colors">{bestMatch.strMeal}</h3>
+                                        <p className="text-[10px] text-gold font-bold uppercase tracking-widest mt-0.5">{bestMatch.strCategory}</p>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="mt-auto flex items-center h-14"><div className="spinner"></div></div>
+                            )}
+                        </div>
+
+                        {/* Global trending */}
+                        <div className="card relative overflow-hidden cursor-pointer min-h-[190px] group" onClick={() => trending && setViewMeal(trending)}>
+                            {trending ? (
+                                <>
+                                    <img src={trending.strMealThumb} className="absolute inset-0 w-full h-full object-cover opacity-55 group-hover:opacity-75 transition-opacity duration-500" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                                    <div className="absolute bottom-5 left-5 z-10">
+                                        <div className="text-[9px] font-black uppercase tracking-widest text-white/70 bg-white/15 border border-white/20 px-2 py-0.5 rounded inline-block mb-1.5">Global Trending</div>
+                                        <h2 className="font-serif text-2xl text-white font-semibold">{trending.strMeal}</h2>
+                                    </div>
+                                </>
+                            ) : (
+                                <div className="flex items-center justify-center h-full"><div className="spinner"></div></div>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Dashboard modules */}
+                    <div className="mb-6 flex items-center gap-2">
+                        <span className="w-1 h-5 bg-gold rounded-full"></span>
+                        <h2 className="font-serif text-lg font-bold">Dashboard Modules</h2>
+                    </div>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-20">
+                        {modules.map(m => (
+                            <button key={m.view} onClick={() => nav(m.view)}
+                                className="card hover:bg-[#252525] text-white py-5 flex flex-col items-center gap-2 font-bold text-xs uppercase tracking-wider transition-all card-lift">
+                                <i className={`fa-solid ${m.icon} text-gold text-lg`}></i>
+                                {m.label}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+
+        /* ═══════════════════════════════════════════════════
+           VIEW: AI GENERATOR
+        ═══════════════════════════════════════════════════ */
+        const AIGeneratorView = () => {
+            const { savedRecipes, setSavedRecipes, setViewMeal, improvisedMeals, setImprovisedMeals } = useContext(AppContext);
+            const [query, setQuery] = useState('');
+            const dq = useDebounce(query, 600);
+            const [results, setResults] = useState([]);
+            const [loading, setLoading] = useState(false);
+            const [improvising, setImprovising] = useState(null);
+            const [toast, setToast] = useState('');
+
+            useEffect(() => {
+                if (!dq) { setResults([]); return; }
+                setLoading(true);
+                fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${dq}`)
+                    .then(r => r.json())
+                    .then(d => { setResults((d.meals || []).slice(0, 6)); setLoading(false); })
+                    .catch(() => setLoading(false));
+            }, [dq]);
+
+            const handleSave = meal => {
                 if (!savedRecipes.find(r => r.idMeal === meal.idMeal)) {
                     setSavedRecipes([...savedRecipes, meal]);
-                    alert(`${meal.strMeal} saved to favorites!`);
+                    setToast(`"${meal.strMeal}" saved to your repertoire!`);
                 } else {
-                    alert(`${meal.strMeal} is already saved.`);
+                    setToast(`"${meal.strMeal}" is already in your repertoire.`);
                 }
             };
 
-            const triggerImprovise = (meal) => {
-                setImproviseMode(meal);
-                // Mock substitution effect
+            const handleImprovise = meal => {
+                setImprovising(meal.idMeal);
+                const ings = getIngredients(meal);
+                const subs = [
+                    `Replace standard oil with Truffle Oil for luxury depth`,
+                    `Swap ${ings[0]?.name || 'main carb'} with a locally-sourced alternative`,
+                    `Add a pinch of smoked paprika for complexity`,
+                    `Finish with fresh micro-herbs for visual appeal`
+                ];
+                // Track improvised meal in context
+                if (!improvisedMeals.find(m => m.idMeal === meal.idMeal)) {
+                    setImprovisedMeals([...improvisedMeals, { ...meal, improvisedAt: new Date().toISOString() }]);
+                }
                 setTimeout(() => {
-                    alert(`Improvisation Suggestion for ${meal.strMeal}:\n\nSubstitute standard oil with Truffle Oil for luxury depth.\nSwap ${getIngredients(meal)[0]?.name || 'main carb'} with locally sourced alternative.`);
-                    setImproviseMode(null);
-                }, 1000);
+                    setImprovising(null);
+                    setToast(`Improvisation logged for "${meal.strMeal}" → Analytics updated!`);
+                }, 900);
+                setTimeout(() => {
+                    alert(`🍽️ Improvisation Suggestions for ${meal.strMeal}:\n\n${subs.map((s,i) => `${i+1}. ${s}`).join('\n')}\n\nThis dish has been added to your Analytics Engine.`);
+                }, 950);
             };
 
             return (
-                <div className="animate-fade-in">
-                    {/* View Recipe Modal */}
-                    {viewMeal && (
-                        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-charcoal/80 backdrop-blur" onClick={() => setViewMeal(null)}>
-                            <div className="bg-white rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
-                                <div className="sticky top-0 bg-white/90 backdrop-blur p-4 border-b border-gray-200 flex justify-between items-center z-10">
-                                    <h3 className="font-serif text-2xl text-charcoal font-bold">{viewMeal.strMeal}</h3>
-                                    <button onClick={() => setViewMeal(null)} className="text-gray-500 hover:text-red-500 transition-colors"><i className="fa-solid fa-times text-2xl"></i></button>
-                                </div>
-                                <div className="p-6">
-                                    <div className="flex gap-2 mb-6">
-                                        <span className="bg-gold text-charcoal px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest">{viewMeal.strCategory}</span>
-                                        <span className="bg-charcoal text-gold px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest">{viewMeal.strArea}</span>
-                                    </div>
-                                    <img src={viewMeal.strMealThumb} className="w-full h-80 object-cover rounded-xl mb-8 shadow-sm" />
-                                    <h4 className="font-serif text-xl font-bold text-charcoal mb-4 border-l-4 border-gold pl-3">Ingredients Needed</h4>
-                                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
-                                        {getIngredients(viewMeal).map((ing, i) => (
-                                            <li key={i} className="flex justify-between bg-cream px-4 py-3 rounded-lg text-sm border border-gray-100 shadow-sm">
-                                                <span className="font-bold text-charcoal uppercase">{ing.name}</span>
-                                                <span className="text-gray-600 font-medium">{ing.measure}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                    <h4 className="font-serif text-xl font-bold text-charcoal mb-4 border-l-4 border-gold pl-3">Step-by-Step Instructions</h4>
-                                    <div className="text-sm text-gray-700 leading-loose whitespace-pre-wrap bg-gray-50 p-6 rounded-xl border border-gray-100">
-                                        {viewMeal.strInstructions}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
+                <div className="animate-fade-in pt-6">
+                    {toast && <Toast message={toast} onDone={() => setToast('')} />}
                     <div className="mb-10 text-center">
-                        <h2 className="font-serif text-3xl text-charcoal mb-3">AI Recipe Generator</h2>
-                        <p className="text-gray-500 max-w-xl mx-auto">Describe your vision or key ingredients, and the AI will summon three optimal culinary paths from the global MealDB index.</p>
+                        <h2 className="font-serif text-4xl text-white mb-3">AI Recipe Generator</h2>
+                        <p className="text-gray-500 text-base">Summon inspiration from the global index.</p>
                     </div>
 
+                    {/* Search bar */}
                     <div className="max-w-2xl mx-auto mb-12 relative">
-                        <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                            <i className="fa-solid fa-wand-sparkles text-gold text-lg"></i>
+                        <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none">
+                            <span className="text-gold">🪄</span>
                         </div>
                         <input
                             type="text"
                             value={query}
-                            onChange={(e) => setQuery(e.target.value)}
-                            placeholder="E.g., Chicken, Pasta, Spicy, Vegan..."
-                            className="w-full bg-white border-2 border-gray-200 text-charcoal font-medium rounded-full py-4 pl-12 pr-6 shadow-sm focus:border-gold transition-colors text-lg"
+                            onChange={e => setQuery(e.target.value)}
+                            placeholder="Search by ingredient, dish name, style..."
+                            className="w-full bg-[#1e1e1e] border border-gray-700 text-white rounded-full py-4 pl-12 pr-12 text-base transition-all"
                         />
                         {loading && (
-                            <div className="absolute inset-y-0 right-4 flex items-center">
-                                <div className="spinner w-6 h-6 border-2 border-t-2"></div>
+                            <div className="absolute inset-y-0 right-5 flex items-center">
+                                <div className="spinner" style={{ width: 22, height: 22, borderWidth: 2 }}></div>
                             </div>
                         )}
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {loading && <div className="col-span-3 text-center py-10 text-gray-400">Consulting culinary database...</div>}
+                    {/* Results */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                        {loading && (
+                            <div className="col-span-full text-center py-12 text-gray-500">
+                                <div className="spinner mx-auto mb-4"></div>
+                                Consulting culinary database...
+                            </div>
+                        )}
                         {!loading && query && results.length === 0 && (
-                            <div className="col-span-3 text-center py-10 text-red-400">No divine inspiration found for that query. Try broader strokes.</div>
+                            <div className="col-span-full text-center py-12 text-red-400/70">
+                                <i className="fa-solid fa-triangle-exclamation text-2xl mb-3 block"></i>
+                                No results found for "{query}". Try a broader search.
+                            </div>
+                        )}
+                        {!loading && !query && (
+                            <div className="col-span-full text-center py-16 text-gray-600">
+                                <i className="fa-solid fa-magnifying-glass text-3xl mb-3 block"></i>
+                                Start typing to search recipes...
+                            </div>
                         )}
                         {!loading && results.map(meal => (
                             <RecipeCard
@@ -525,8 +564,8 @@
                                 meal={meal}
                                 actions={[
                                     { label: 'View Recipe', icon: 'fa-regular fa-eye', onClick: () => setViewMeal(meal), primary: true },
-                                    { label: 'Save', icon: 'fa-regular fa-bookmark', onClick: handleSave, primary: false },
-                                    { label: improviseMode?.idMeal === meal.idMeal ? 'Thinking...' : 'Improvise', icon: 'fa-solid fa-lightbulb', onClick: () => triggerImprovise(meal), primary: false }
+                                    { label: 'Save', icon: 'fa-regular fa-bookmark', onClick: () => handleSave(meal), primary: false },
+                                    { label: improvising === meal.idMeal ? 'Loading...' : 'Improvise', icon: 'fa-solid fa-lightbulb', onClick: () => handleImprovise(meal), primary: false }
                                 ]}
                             />
                         ))}
@@ -535,227 +574,306 @@
             );
         };
 
-        /* --- View: Digital Menu & Feedback Analyzer --- */
-        const MenuAnalyzerView = () => {
-            const { savedRecipes, feedbacks, setFeedbacks } = useContext(AppContext);
-            const [selectedMealId, setSelectedMealId] = useState(null);
-            const [ratingInput, setRatingInput] = useState(5);
-            const [commentInput, setCommentInput] = useState('');
+        /* ═══════════════════════════════════════════════════
+           VIEW: MENU & FEEDBACK
+        ═══════════════════════════════════════════════════ */
+        const MenuView = () => {
+            const { savedRecipes, setSavedRecipes, feedbacks, setFeedbacks, setViewMeal } = useContext(AppContext);
+            const [selectedId, setSelectedId] = useState(null);
+            const [rating, setRating] = useState(5);
+            const [comment, setComment] = useState('');
+            const [toast, setToast] = useState('');
 
-            const handleAddFeedback = () => {
-                if (!selectedMealId) return;
-                const newFeedbacks = { ...feedbacks };
-                if (!newFeedbacks[selectedMealId]) {
-                    newFeedbacks[selectedMealId] = { rating: ratingInput, comments: [] };
+            const selectedMeal = savedRecipes.find(r => r.idMeal === selectedId);
+
+            const submitFeedback = () => {
+                if (!selectedId) return;
+                const nf = { ...feedbacks };
+                if (!nf[selectedId]) {
+                    nf[selectedId] = { rating, comments: [] };
                 } else {
-                    // Moving avg mock
-                    newFeedbacks[selectedMealId].rating = (newFeedbacks[selectedMealId].rating + ratingInput) / 2;
+                    nf[selectedId].rating = parseFloat(((nf[selectedId].rating + rating) / 2).toFixed(1));
                 }
-                if (commentInput) {
-                    newFeedbacks[selectedMealId].comments.push(commentInput);
-                }
-                setFeedbacks(newFeedbacks);
-                setCommentInput('');
-                alert('Feedback logged to ledger.');
+                if (comment.trim()) { nf[selectedId].comments = [...(nf[selectedId].comments || []), comment.trim()]; }
+                setFeedbacks(nf);
+                setComment('');
+                setToast('Feedback committed to the ledger!');
+            };
+
+            const removeRecipe = id => {
+                setSavedRecipes(savedRecipes.filter(r => r.idMeal !== id));
+                if (selectedId === id) setSelectedId(null);
             };
 
             return (
-                <div className="animate-fade-in grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <div className="lg:col-span-2">
-                        <h2 className="font-serif text-3xl text-charcoal mb-3 border-l-4 border-gold pl-4">Digital Menu Ledger</h2>
-                        <p className="text-gray-500 mb-8">Manage saved recipes and observe guest reactions.</p>
+                <div className="animate-fade-in">
+                    {toast && <Toast message={toast} onDone={() => setToast('')} />}
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div className="lg:col-span-2">
+                            <div className="flex items-center gap-2 mb-2">
+                                <span className="w-1 h-6 bg-gold rounded-full"></span>
+                                <h2 className="font-serif text-2xl font-bold text-white">Digital Menu Ledger</h2>
+                            </div>
+                            <p className="text-gray-500 text-sm mb-6">Manage saved recipes and observe guest reactions.</p>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {savedRecipes.length === 0 ? (
-                                <p className="text-gray-400 italic col-span-2">Menu is empty. Save recipes from the generator first.</p>
+                                <div className="card p-10 text-center text-gray-500">
+                                    <i className="fa-solid fa-book-open text-3xl mb-3 block text-gray-700"></i>
+                                    Menu is empty. Search and save recipes from the AI Generator.
+                                </div>
                             ) : (
-                                savedRecipes.map(meal => (
-                                    <div key={meal.idMeal}
-                                        className={`glass-card-no-hover p-4 flex gap-4 cursor-pointer transition-colors ${selectedMealId === meal.idMeal ? 'border-gold bg-gold/5' : 'hover:border-gold/50'}`}
-                                        onClick={() => setSelectedMealId(meal.idMeal)}>
-                                        <img src={meal.strMealThumb} className="w-16 h-16 rounded object-cover shadow-sm" />
-                                        <div>
-                                            <h5 className="font-serif font-bold text-charcoal line-clamp-1">{meal.strMeal}</h5>
-                                            <div className="text-gold text-xs mt-1">
-                                                <i className="fa-solid fa-star mr-1"></i>
-                                                {feedbacks[meal.idMeal] ? feedbacks[meal.idMeal].rating.toFixed(1) : 'No Ratings'}
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    {savedRecipes.map(meal => (
+                                        <div key={meal.idMeal}
+                                            className={`card p-4 flex gap-4 cursor-pointer transition-all ${selectedId === meal.idMeal ? '!border-gold bg-gold/5' : ''}`}
+                                            onClick={() => setSelectedId(meal.idMeal)}>
+                                            <img src={meal.strMealThumb} className="w-14 h-14 rounded-lg object-cover flex-shrink-0 cursor-pointer hover:opacity-80"
+                                                onClick={e => { e.stopPropagation(); setViewMeal(meal); }} />
+                                            <div className="flex-1 min-w-0">
+                                                <h5 className="font-serif font-bold text-white text-sm leading-tight truncate">{meal.strMeal}</h5>
+                                                <p className="text-[10px] text-gold uppercase tracking-wide mt-0.5">{meal.strCategory}</p>
+                                                <div className="flex items-center justify-between mt-2">
+                                                    <div className="text-xs text-gold">
+                                                        {[1,2,3,4,5].map(s => (
+                                                            <i key={s} className={`fa-${(feedbacks[meal.idMeal]?.rating || 0) >= s ? 'solid' : 'regular'} fa-star mr-0.5 text-[10px]`}></i>
+                                                        ))}
+                                                        <span className="text-gray-500 ml-1">{feedbacks[meal.idMeal] ? `${feedbacks[meal.idMeal].rating}` : '—'}</span>
+                                                    </div>
+                                                    <button onClick={e => { e.stopPropagation(); removeRecipe(meal.idMeal); }} className="text-gray-600 hover:text-red-400 transition-colors">
+                                                        <i className="fa-solid fa-trash text-xs"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Feedback panel */}
+                        <div className="card p-6 self-start sticky top-20">
+                            <h3 className="font-serif text-lg border-b border-gray-800 pb-3 mb-4 text-white">Feedback Engine</h3>
+                            {!selectedMeal ? (
+                                <p className="text-sm text-gray-500 italic">Select a dish from the menu to rate and review.</p>
+                            ) : (
+                                <>
+                                    <div className="flex items-center gap-3 mb-5">
+                                        <img src={selectedMeal.strMealThumb} className="w-10 h-10 rounded-lg object-cover" />
+                                        <h4 className="font-bold text-white text-sm leading-tight">{selectedMeal.strMeal}</h4>
                                     </div>
-                                ))
+                                    <label className="block text-[10px] uppercase text-gray-500 font-bold mb-2">Guest Rating</label>
+                                    <div className="flex justify-between mb-1">
+                                        {[1,2,3,4,5].map(s => (
+                                            <button key={s} onClick={() => setRating(s)} className={`text-xl transition-colors ${s <= rating ? 'text-gold' : 'text-gray-700 hover:text-gold/50'}`}>
+                                                <i className="fa-solid fa-star"></i>
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <p className="text-center text-xs text-gold font-bold mb-4">{rating} / 5 Stars</p>
+
+                                    <label className="block text-[10px] uppercase text-gray-500 font-bold mb-2">Tasting Notes</label>
+                                    <textarea
+                                        value={comment}
+                                        onChange={e => setComment(e.target.value)}
+                                        rows="3" className="w-full border border-gray-700 rounded-lg p-3 text-sm bg-[#151515] text-white resize-none"
+                                        placeholder="e.g. Exceptional plating, needs more salt...">
+                                    </textarea>
+                                    <button onClick={submitFeedback} className="w-full mt-3 bg-gold text-black font-bold py-2.5 rounded-lg hover:bg-yellow-400 transition-colors text-sm">
+                                        Commit Feedback
+                                    </button>
+
+                                    {feedbacks[selectedId]?.comments?.length > 0 && (
+                                        <div className="mt-5 pt-4 border-t border-gray-800">
+                                            <h5 className="text-[10px] font-bold text-gray-500 uppercase mb-2">Previous Notes</h5>
+                                            <ul className="space-y-2">
+                                                {feedbacks[selectedId].comments.slice(-3).map((c, i) => (
+                                                    <li key={i} className="bg-[#151515] p-2.5 rounded-lg border-l-2 border-gold text-xs text-gray-400 italic">"{c}"</li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
+                                </>
                             )}
                         </div>
                     </div>
-
-                    <div className="glass-card-no-hover rounded-2xl p-6 bg-white self-start sticky top-24">
-                        <h3 className="font-serif text-xl border-b border-gray-100 pb-3 mb-4">Feedback Engine</h3>
-                        {!selectedMealId ? (
-                            <p className="text-sm text-gray-500">Select a dish from the menu to analyze or submit feedback.</p>
-                        ) : (
-                            <div>
-                                <h4 className="font-bold text-charcoal mb-4">{savedRecipes.find(r => r.idMeal === selectedMealId)?.strMeal}</h4>
-                                <div className="mb-4">
-                                    <label className="block text-xs uppercase text-gray-500 font-bold mb-2">Guest Rating (1-5)</label>
-                                    <input type="range" min="1" max="5" value={ratingInput} onChange={e => setRatingInput(Number(e.target.value))} className="w-full accent-gold" />
-                                    <div className="text-center font-bold text-gold mt-2 text-lg">{ratingInput} Stars</div>
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-xs uppercase text-gray-500 font-bold mb-2">Tasting Notes</label>
-                                    <textarea value={commentInput} onChange={e => setCommentInput(e.target.value)} rows="3" className="w-full border border-gray-300 rounded p-2 text-sm bg-gray-50" placeholder="e.g. Needs more salt, exceptional plating..."></textarea>
-                                </div>
-                                <button onClick={handleAddFeedback} className="w-full bg-charcoal text-white font-bold py-3 rounded-lg hover:bg-gold transition-colors">Commit Feedback</button>
-
-                                {feedbacks[selectedMealId]?.comments?.length > 0 && (
-                                    <div className="mt-6 pt-4 border-t border-gray-100">
-                                        <h5 className="text-xs font-bold text-gray-500 uppercase mb-3">Recent Comments</h5>
-                                        <ul className="text-xs text-gray-600 space-y-2">
-                                            {feedbacks[selectedMealId].comments.map((c, i) => (
-                                                <li key={i} className="bg-cream p-2 rounded border-l-2 border-gold italic">"{c}"</li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                )}
-                            </div>
-                        )}
-                    </div>
                 </div>
             );
         };
 
-        /* --- View: Smart Kitchen Inventory --- */
-        const InventoryManagerView = ({ setCurrentView }) => {
+        /* ═══════════════════════════════════════════════════
+           VIEW: INVENTORY
+        ═══════════════════════════════════════════════════ */
+        const InventoryView = ({ nav }) => {
             const { inventory, setInventory } = useContext(AppContext);
-            const [newItemName, setNewItemName] = useState('');
-            const [newItemQty, setNewItemQty] = useState('');
+            const [name, setName] = useState('');
+            const [qty, setQty] = useState('');
+            const [toast, setToast] = useState('');
 
-            const handleAddItem = (e) => {
+            const add = e => {
                 e.preventDefault();
-                if (!newItemName || !newItemQty) return;
-                const newItem = { id: Date.now(), name: newItemName, quantity: newItemQty, low: false };
-                setInventory([...inventory, newItem]);
-                setNewItemName(''); setNewItemQty('');
+                if (!name || !qty) return;
+                setInventory([...inventory, { id: Date.now(), name, quantity: qty, low: false }]);
+                setName(''); setQty('');
+                setToast(`"${name}" added to inventory!`);
             };
+            const toggleLow = id => setInventory(inventory.map(i => i.id === id ? { ...i, low: !i.low } : i));
+            const del = id => setInventory(inventory.filter(i => i.id !== id));
 
-            const toggleLow = (id) => {
-                setInventory(inventory.map(item => item.id === id ? { ...item, low: !item.low } : item));
-            };
-
-            const deleteItem = (id) => {
-                setInventory(inventory.filter(item => item.id !== id));
-            };
+            const lowCount = inventory.filter(i => i.low).length;
 
             return (
-                <div className="animate-fade-in grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div className="md:col-span-2">
-                        <div className="flex justify-between items-end mb-6 border-b border-gray-200 pb-4">
-                            <h2 className="font-serif text-3xl text-charcoal border-l-4 border-gold pl-4">Cold Room & Dry Store</h2>
-                            <button onClick={() => setCurrentView('generator')} className="text-sm font-bold text-gold hover:text-charcoal"><i className="fa-solid fa-wand-magic-sparkles mr-2"></i>Auto-Suggest Meal</button>
-                        </div>
+                <div className="animate-fade-in">
+                    {toast && <Toast message={toast} onDone={() => setToast('')} />}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div className="md:col-span-2">
+                            <div className="flex justify-between items-center mb-6 border-b border-gray-800 pb-4">
+                                <div className="flex items-center gap-2">
+                                    <span className="w-1 h-6 bg-gold rounded-full"></span>
+                                    <h2 className="font-serif text-2xl font-bold text-white">Cold Room & Dry Store</h2>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    {lowCount > 0 && (
+                                        <span className="bg-red-500/20 text-red-400 text-[10px] font-bold px-2 py-1 rounded-full border border-red-500/30">
+                                            {lowCount} LOW STOCK
+                                        </span>
+                                    )}
+                                    <button onClick={() => nav('generator')} className="text-xs font-bold text-gold hover:text-white transition-colors">
+                                        <i className="fa-solid fa-wand-magic-sparkles mr-1"></i>Auto-Suggest Meal
+                                    </button>
+                                </div>
+                            </div>
 
-                        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6">
-                            <table className="w-full text-left border-collapse">
-                                <thead>
-                                    <tr className="bg-charcoal text-gold text-xs uppercase tracking-wider">
-                                        <th className="p-4 rounded-tl-xl border-b border-gray-800">Ingredient Form</th>
-                                        <th className="p-4 border-b border-gray-800">Volume/Qty</th>
-                                        <th className="p-4 border-b border-gray-800 text-center">Status</th>
-                                        <th className="p-4 rounded-tr-xl border-b border-gray-800 text-right">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {inventory.length === 0 && <tr><td colSpan="4" className="p-8 text-center text-gray-500 italic">Inventory is completely depleted.</td></tr>}
-                                    {inventory.map(item => (
-                                        <tr key={item.id} className="border-b border-gray-100 hover:bg-cream/50 transition-colors">
-                                            <td className="p-4 font-medium text-charcoal">{item.name}</td>
-                                            <td className="p-4 text-gray-600">{item.quantity}</td>
-                                            <td className="p-4 text-center">
-                                                <button onClick={() => toggleLow(item.id)} className={`px-3 py-1 rounded-full text-xs font-bold border transition-colors ${item.low ? 'bg-red-50 text-red-600 border-red-200 hover:bg-red-100' : 'bg-green-50 text-green-600 border-green-200 hover:bg-green-100'}`}>
-                                                    {item.low ? 'LOW STOCK' : 'OPTIMAL'}
-                                                </button>
-                                            </td>
-                                            <td className="p-4 text-right">
-                                                <button onClick={() => deleteItem(item.id)} className="text-gray-400 hover:text-red-500 transition-colors"><i className="fa-solid fa-trash"></i></button>
-                                            </td>
+                            <div className="card overflow-hidden">
+                                <table className="w-full text-left">
+                                    <thead>
+                                        <tr className="bg-[#151515] text-gold text-[10px] uppercase tracking-widest">
+                                            <th className="p-4">Ingredient</th>
+                                            <th className="p-4">Quantity</th>
+                                            <th className="p-4 text-center">Status</th>
+                                            <th className="p-4 text-right">Action</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        {inventory.length === 0 && (
+                                            <tr><td colSpan="4" className="p-8 text-center text-gray-600 italic">Inventory is empty. Add items using the form.</td></tr>
+                                        )}
+                                        {inventory.map(item => (
+                                            <tr key={item.id} className="border-t border-gray-800 hover:bg-white/2 transition-colors">
+                                                <td className="p-4 font-medium text-white">{item.name}</td>
+                                                <td className="p-4 text-gray-400 text-sm">{item.quantity}</td>
+                                                <td className="p-4 text-center">
+                                                    <button onClick={() => toggleLow(item.id)}
+                                                        className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold border transition-colors ${item.low ? 'bg-red-500/15 text-red-400 border-red-500/30 hover:bg-red-500/25' : 'bg-green-500/15 text-green-400 border-green-500/30 hover:bg-green-500/25'}`}>
+                                                        {item.low ? 'LOW STOCK' : 'OPTIMAL'}
+                                                    </button>
+                                                </td>
+                                                <td className="p-4 text-right">
+                                                    <button onClick={() => del(item.id)} className="text-gray-600 hover:text-red-400 transition-colors">
+                                                        <i className="fa-solid fa-trash text-sm"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="glass-card-no-hover rounded-2xl p-6 bg-white self-start sticky top-24">
-                        <h3 className="font-serif text-xl border-b border-gray-100 pb-3 mb-4"><i className="fa-solid fa-truck-ramp-box text-gold mr-2"></i>Receiving Cargo</h3>
-                        <form onSubmit={handleAddItem}>
-                            <div className="mb-4">
-                                <label className="block text-xs uppercase text-gray-500 font-bold mb-2">Item Name</label>
-                                <input type="text" value={newItemName} onChange={e => setNewItemName(e.target.value)} required className="w-full border border-gray-300 rounded p-2 text-sm bg-gray-50" placeholder="e.g. Saffron Threads" />
-                            </div>
-                            <div className="mb-6">
-                                <label className="block text-xs uppercase text-gray-500 font-bold mb-2">Quantity & Measure</label>
-                                <input type="text" value={newItemQty} onChange={e => setNewItemQty(e.target.value)} required className="w-full border border-gray-300 rounded p-2 text-sm bg-gray-50" placeholder="e.g. 500g, 2 cases" />
-                            </div>
-                            <button type="submit" className="w-full bg-gold text-charcoal font-bold py-3 rounded-lg hover:bg-yellow-500 shadow-md transition-all">Add to Manifest</button>
-                        </form>
+                        <div className="card p-6 self-start sticky top-20">
+                            <h3 className="font-serif text-lg text-white border-b border-gray-800 pb-3 mb-4">
+                                <i className="fa-solid fa-truck-ramp-box text-gold mr-2"></i>Receiving Cargo
+                            </h3>
+                            <form onSubmit={add}>
+                                <label className="block text-[10px] uppercase text-gray-500 font-bold mb-1.5">Item Name</label>
+                                <input type="text" value={name} onChange={e => setName(e.target.value)} required
+                                    className="w-full border border-gray-700 rounded-lg p-2.5 text-sm bg-[#151515] text-white mb-4"
+                                    placeholder="e.g. Saffron Threads" />
+                                <label className="block text-[10px] uppercase text-gray-500 font-bold mb-1.5">Quantity & Measure</label>
+                                <input type="text" value={qty} onChange={e => setQty(e.target.value)} required
+                                    className="w-full border border-gray-700 rounded-lg p-2.5 text-sm bg-[#151515] text-white mb-5"
+                                    placeholder="e.g. 500g, 2 cases" />
+                                <button type="submit" className="w-full bg-gold text-black font-bold py-2.5 rounded-lg hover:bg-yellow-400 transition-colors text-sm">
+                                    <i className="fa-solid fa-plus mr-2"></i>Add to Manifest
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             );
         };
 
-        /* --- View: Recipe Optimizer --- */
-        const RecipeOptimizerView = () => {
+        /* ═══════════════════════════════════════════════════
+           VIEW: OPTIMIZER
+        ═══════════════════════════════════════════════════ */
+        const OptimizerView = () => {
+            const { setViewMeal } = useContext(AppContext);
             const [query, setQuery] = useState('');
+            const dq = useDebounce(query, 600);
             const [calories, setCalories] = useState(600);
-            const debouncedQuery = useDebounce(query, 600);
             const [results, setResults] = useState([]);
             const [loading, setLoading] = useState(false);
 
             useEffect(() => {
-                if (!debouncedQuery) { setResults([]); return; }
-                const fetchRecipes = async () => {
-                    setLoading(true);
-                    try {
-                        const res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${debouncedQuery}`);
-                        const data = await res.json();
-                        setResults((data.meals || []).slice(0, 4));
-                    } catch (e) {
-                        console.error(e);
-                    }
-                    setLoading(false);
-                };
-                fetchRecipes();
-            }, [debouncedQuery]);
+                if (!dq) { setResults([]); return; }
+                setLoading(true);
+                fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${dq}`)
+                    .then(r => r.json())
+                    .then(d => { setResults((d.meals || []).slice(0, 4)); setLoading(false); })
+                    .catch(() => setLoading(false));
+            }, [dq]);
+
+            // Sort by closest-to-target calories
+            const sorted = [...results].sort((a, b) => {
+                const sa = mockStats(a.idMeal), sb = mockStats(b.idMeal);
+                return Math.abs(sa.calories - calories) - Math.abs(sb.calories - calories);
+            });
 
             return (
                 <div className="animate-fade-in">
-                    <div className="mb-8 border-b-4 border-gold inline-block">
-                        <h2 className="font-serif text-3xl text-charcoal mb-2">Recipe Optimizer Matrix</h2>
+                    <div className="flex items-center gap-2 mb-8">
+                        <span className="w-1 h-7 bg-gold rounded-full"></span>
+                        <h2 className="font-serif text-2xl font-bold text-white">Recipe Optimizer Matrix</h2>
                     </div>
 
-                    <div className="bg-charcoal text-white rounded-2xl p-6 mb-10 shadow-lg flex flex-col md:flex-row gap-6 items-end">
-                        <div className="flex-1 w-full">
-                            <label className="block text-xs uppercase text-gold font-bold mb-2">Target Recipe Type / Ingredient</label>
-                            <input type="text" value={query} onChange={e => setQuery(e.target.value)} placeholder="e.g. Salmon" className="w-full bg-white/10 border border-gray-600 focus:border-gold rounded p-3 text-white placeholder-gray-400" />
-                        </div>
-                        <div className="flex-1 w-full">
-                            <label className="block text-xs uppercase text-gold font-bold mb-2">Dietary Target (Calories: {calories})</label>
-                            <input type="range" min="300" max="1200" step="50" value={calories} onChange={e => setCalories(Number(e.target.value))} className="w-full accent-gold mt-2" />
-                            <div className="flex justify-between text-xs text-gray-400 mt-1">
-                                <span>300 kcal (Lean)</span>
-                                <span>1200 kcal (Indulgent)</span>
+                    <div className="card p-6 mb-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label className="block text-[10px] uppercase text-gold font-bold mb-2">Target Dish / Ingredient</label>
+                                <input type="text" value={query} onChange={e => setQuery(e.target.value)}
+                                    placeholder="e.g. Salmon, Vegan, Spanish..."
+                                    className="w-full border border-gray-700 rounded-lg p-3 text-white bg-[#151515] text-sm" />
+                            </div>
+                            <div>
+                                <label className="block text-[10px] uppercase text-gold font-bold mb-2">Calorie Target: <span className="text-white">{calories} kcal</span></label>
+                                <input type="range" min="300" max="1200" step="50" value={calories} onChange={e => setCalories(Number(e.target.value))} className="w-full accent-gold mt-2" />
+                                <div className="flex justify-between text-[10px] text-gray-600 mt-1">
+                                    <span>300 kcal (Lean)</span><span>1200 kcal (Indulgent)</span>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {loading && <div className="col-span-full text-center py-10 text-gray-500">Calculating nutrition density matrices...</div>}
-                        {!loading && results.map(meal => (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                        {loading && (
+                            <div className="col-span-full text-center py-12 text-gray-500">
+                                <div className="spinner mx-auto mb-4"></div>
+                                Calculating nutrition matrices...
+                            </div>
+                        )}
+                        {!loading && !query && (
+                            <div className="col-span-full text-center py-12 text-gray-600">
+                                <i className="fa-solid fa-scale-balanced text-3xl mb-3 block"></i>
+                                Enter a dish or ingredient to optimize against your calorie target
+                            </div>
+                        )}
+                        {!loading && sorted.map(meal => (
                             <RecipeCard
                                 key={meal.idMeal}
                                 meal={meal}
                                 showNutrition={true}
                                 targetCalories={calories}
                                 actions={[
-                                    { label: 'View Spec', icon: 'fa-solid fa-microscope', onClick: () => alert(`Spec analysis for ${meal.strMeal} initialized.`), primary: false }
+                                    { label: 'View Recipe', icon: 'fa-solid fa-microscope', onClick: () => setViewMeal(meal), primary: true }
                                 ]}
                             />
                         ))}
@@ -764,38 +882,387 @@
             );
         };
 
+        /* ═══════════════════════════════════════════════════
+           VIEW: PLANNER
+        ═══════════════════════════════════════════════════ */
+        const PlannerView = () => {
+            const { savedRecipes, setViewMeal } = useContext(AppContext);
+            const DAYS = ['MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY','SUNDAY'];
+            const [schedule, setSchedule] = useLocalStorage('latelier_schedule', {});
+            const [dragOver, setDragOver] = useState(null);
+
+            const onDragStart = (e, meal) => e.dataTransfer.setData('mealId', meal.idMeal);
+            const onDrop = (e, day) => {
+                e.preventDefault();
+                const id = e.dataTransfer.getData('mealId');
+                const meal = savedRecipes.find(r => r.idMeal === id);
+                if (meal) setSchedule({ ...schedule, [day]: meal });
+                setDragOver(null);
+            };
+            const clearDay = day => { const s = { ...schedule }; delete s[day]; setSchedule(s); };
+
+            const plannedMeals = Object.values(schedule).filter(Boolean);
+            const shoppingItems = plannedMeals.flatMap(m => getIngredients(m).map(i => i.name));
+            const uniqueItems = [...new Set(shoppingItems)];
+
+            const exportCSV = () => {
+                const rows = [['Day', 'Dish', 'Category', 'Area']];
+                DAYS.forEach(d => {
+                    const m = schedule[d];
+                    rows.push([d, m?.strMeal || '—', m?.strCategory || '—', m?.strArea || '—']);
+                });
+                const csv = rows.map(r => r.join(',')).join('\n');
+                const a = document.createElement('a');
+                a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+                a.download = 'latelier_planner.csv';
+                a.click();
+            };
+
+            return (
+                <div className="animate-fade-in pt-2">
+                    <div className="flex items-center justify-between mb-8">
+                        <div className="flex items-center gap-2">
+                            <span className="w-1 h-7 bg-gold rounded-full"></span>
+                            <h2 className="font-serif text-2xl font-bold text-white">Weekly Logistics</h2>
+                        </div>
+                        <button onClick={exportCSV} className="text-xs text-gold font-bold hover:text-white transition-colors">
+                            <i className="fa-solid fa-file-csv mr-1"></i>Export Week
+                        </button>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                        {/* Calendar */}
+                        <div className="lg:col-span-3 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-4 gap-3">
+                            {DAYS.map(day => (
+                                <div
+                                    key={day}
+                                    onDragOver={e => { e.preventDefault(); setDragOver(day); }}
+                                    onDragLeave={() => setDragOver(null)}
+                                    onDrop={e => onDrop(e, day)}
+                                    className={`card relative p-3 flex flex-col transition-all ${dragOver === day ? '!border-gold bg-gold/5' : ''}`}
+                                    style={{ minHeight: 130 }}>
+                                    <h4 className="text-[9px] uppercase font-black text-gray-500 tracking-widest mb-2">{day}</h4>
+                                    {schedule[day] ? (
+                                        <div className="flex flex-col items-center gap-2 flex-1 justify-center">
+                                            <img
+                                                src={schedule[day].strMealThumb}
+                                                className="w-16 h-16 rounded-xl object-cover shadow-lg cursor-pointer hover:scale-105 transition-transform"
+                                                onClick={() => setViewMeal(schedule[day])}
+                                            />
+                                            <p className="text-[11px] font-bold text-white text-center leading-tight line-clamp-2">{schedule[day].strMeal}</p>
+                                            <button onClick={() => clearDay(day)} className="text-[10px] text-gray-600 hover:text-red-400 transition-colors">
+                                                <i className="fa-solid fa-xmark mr-1"></i>Clear
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <div className="flex-1 flex items-center justify-center">
+                                            <p className="text-xs text-gray-700 italic text-center">Drag recipe here</p>
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Sidebar */}
+                        <div className="flex flex-col gap-4">
+                            <div className="card p-5 flex-1">
+                                <h3 className="font-serif text-base text-white border-b border-gray-800 pb-2 mb-3">Saved Repertoire</h3>
+                                {savedRecipes.length === 0 ? (
+                                    <p className="text-xs text-gray-600 italic">No recipes saved yet.</p>
+                                ) : (
+                                    <div className="flex flex-col gap-2">
+                                        {savedRecipes.map(meal => (
+                                            <div
+                                                key={meal.idMeal}
+                                                draggable
+                                                onDragStart={e => onDragStart(e, meal)}
+                                                className="flex items-center gap-3 bg-[#151515] border border-gray-800 p-2 rounded-lg cursor-grab hover:border-gold/40 transition-colors"
+                                            >
+                                                <img src={meal.strMealThumb} className="w-9 h-9 rounded-lg object-cover flex-shrink-0" />
+                                                <span className="text-xs font-semibold text-white leading-tight line-clamp-2">{meal.strMeal}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+
+                            {uniqueItems.length > 0 && (
+                                <div className="card p-5">
+                                    <h3 className="font-serif text-base text-gold border-b border-gray-800 pb-2 mb-3">
+                                        <i className="fa-solid fa-cart-shopping mr-2 text-sm"></i>Shopping List
+                                    </h3>
+                                    <ul className="space-y-1 max-h-48 overflow-y-auto pr-1">
+                                        {uniqueItems.slice(0, 20).map((item, i) => (
+                                            <li key={i} className="text-[11px] text-gray-400 flex items-center gap-2">
+                                                <span className="w-1 h-1 bg-gold rounded-full flex-shrink-0"></span>{item}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+                            {uniqueItems.length === 0 && (
+                                <div className="card p-5">
+                                    <h3 className="font-serif text-base text-gold border-b border-gray-800 pb-2 mb-3">Auto-Shopping List</h3>
+                                    <p className="text-xs text-gray-600 italic">All planned ingredients are in inventory, or week is empty.</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        /* ═══════════════════════════════════════════════════
+           VIEW: ANALYTICS
+        ═══════════════════════════════════════════════════ */
+        const AnalyticsView = () => {
+            const { savedRecipes, feedbacks, improvisedMeals, setViewMeal } = useContext(AppContext);
+
+            // Build chart data: improvised meals + saved recipes with rating
+            const allTracked = [
+                ...improvisedMeals.map(m => ({
+                    meal: m,
+                    rating: feedbacks[m.idMeal]?.rating || 4.5,
+                    label: 'Improvised',
+                    color: '#d4af37'
+                })),
+                ...savedRecipes
+                    .filter(r => feedbacks[r.idMeal])
+                    .filter(r => !improvisedMeals.find(m => m.idMeal === r.idMeal))
+                    .map(m => ({
+                        meal: m,
+                        rating: feedbacks[m.idMeal].rating,
+                        label: 'Rated',
+                        color: '#3a7bd5'
+                    }))
+            ];
+
+            const avgRating = allTracked.length > 0
+                ? (allTracked.reduce((a, c) => a + c.rating, 0) / allTracked.length).toFixed(1)
+                : 0;
+
+            const exportCSV = () => {
+                const rows = [['Dish', 'Category', 'Area', 'Type', 'Rating']];
+                allTracked.forEach(({ meal, rating, label }) => {
+                    rows.push([meal.strMeal, meal.strCategory, meal.strArea, label, rating]);
+                });
+                const csv = rows.map(r => r.join(',')).join('\n');
+                const a = document.createElement('a');
+                a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+                a.download = 'latelier_analytics.csv';
+                a.click();
+            };
+
+            return (
+                <div className="animate-fade-in pt-2">
+                    {/* Header */}
+                    <div className="flex justify-between items-center mb-8">
+                        <div className="flex items-center gap-2">
+                            <span className="w-1 h-7 bg-gold rounded-full"></span>
+                            <h2 className="font-serif text-2xl font-bold text-white">Analytics Engine</h2>
+                        </div>
+                        <button onClick={exportCSV} className="text-xs text-gold font-bold hover:text-white transition-colors">
+                            <i className="fa-solid fa-file-csv mr-1.5"></i>Export CSV Report
+                        </button>
+                    </div>
+
+                    {/* Summary cards */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                        {[
+                            { label: 'Improvised Dishes', value: improvisedMeals.length, icon: 'fa-lightbulb', color: 'text-gold' },
+                            { label: 'Rated Recipes', value: Object.keys(feedbacks).length, icon: 'fa-star', color: 'text-yellow-400' },
+                            { label: 'Avg Performance', value: avgRating > 0 ? `${avgRating}/5` : '—', icon: 'fa-chart-line', color: 'text-green-400' },
+                            { label: 'Total Tracked', value: allTracked.length, icon: 'fa-database', color: 'text-blue-400' },
+                        ].map((s, i) => (
+                            <div key={i} className="card p-4">
+                                <p className="text-[10px] text-gray-500 uppercase tracking-wider font-bold mb-2">{s.label}</p>
+                                <div className="flex items-center justify-between">
+                                    <span className="text-2xl font-bold text-white">{s.value}</span>
+                                    <i className={`fa-solid ${s.icon} ${s.color} opacity-70`}></i>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Bar Chart */}
+                    <div className="card p-6 mb-6">
+                        <h3 className="font-serif text-lg text-white mb-1">Recipe Performance Matrix</h3>
+                        <p className="text-xs text-gray-500 mb-6">Displaying all improvised and rated dishes. Click any bar to view recipe.</p>
+
+                        {allTracked.length === 0 ? (
+                            <div className="h-48 flex flex-col items-center justify-center text-gray-600">
+                                <i className="fa-solid fa-chart-column text-3xl mb-3"></i>
+                                <p className="text-sm">No data yet. Improvise recipes in the AI Generator or rate dishes in the Menu.</p>
+                            </div>
+                        ) : (
+                            <div className="flex gap-2 items-end border-b border-l border-gray-800 relative" style={{ height: 240, paddingBottom: 2 }}>
+                                {/* Y-axis labels */}
+                                <div className="absolute -left-8 top-0 bottom-0 flex flex-col justify-between text-[9px] text-gray-600 text-right pr-2">
+                                    {[5,4,3,2,1,0].map(v => <span key={v}>{v}</span>)}
+                                </div>
+
+                                {/* Bars */}
+                                {allTracked.map(({ meal, rating, label, color }, i) => {
+                                    const pct = (rating / 5) * 100;
+                                    return (
+                                        <div key={i} className="flex-1 flex flex-col items-center gap-1 group cursor-pointer" onClick={() => setViewMeal(meal)}>
+                                            <div className="text-[10px] text-gray-500 font-bold opacity-0 group-hover:opacity-100 transition-opacity">
+                                                {rating}★
+                                            </div>
+                                            <div className="w-full relative" style={{ height: '100%', display: 'flex', alignItems: 'flex-end' }}>
+                                                <div
+                                                    className="w-full rounded-t-sm bar-fill transition-opacity hover:opacity-80"
+                                                    style={{
+                                                        height: `${pct}%`,
+                                                        backgroundColor: color,
+                                                        opacity: 0.85,
+                                                        transformOrigin: 'bottom',
+                                                        animationDelay: `${i * 0.08}s`
+                                                    }}
+                                                ></div>
+                                            </div>
+                                            <div className="text-[9px] text-gray-500 text-center truncate w-full px-1 pb-1"
+                                                style={{ maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                                {meal.strMeal.length > 12 ? meal.strMeal.slice(0, 11) + '…' : meal.strMeal}
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        )}
+
+                        {allTracked.length > 0 && (
+                            <div className="flex gap-4 mt-3">
+                                <div className="flex items-center gap-1.5 text-[10px] text-gray-500">
+                                    <span className="w-3 h-3 rounded-sm inline-block" style={{ backgroundColor: '#d4af37' }}></span> Improvised
+                                </div>
+                                <div className="flex items-center gap-1.5 text-[10px] text-gray-500">
+                                    <span className="w-3 h-3 rounded-sm inline-block" style={{ backgroundColor: '#3a7bd5' }}></span> Rated Only
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Improvised dish cards */}
+                    {improvisedMeals.length > 0 && (
+                        <div className="mb-6">
+                            <h3 className="font-serif text-lg text-white mb-4 flex items-center gap-2">
+                                <i className="fa-solid fa-lightbulb text-gold"></i> Improvised Dishes
+                            </h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                {improvisedMeals.map(meal => {
+                                    const stats = mockStats(meal.idMeal);
+                                    const fb = feedbacks[meal.idMeal];
+                                    return (
+                                        <div
+                                            key={meal.idMeal}
+                                            onClick={() => setViewMeal(meal)}
+                                            className="card p-4 flex gap-3 cursor-pointer hover:border-gold/40 transition-all"
+                                        >
+                                            <img src={meal.strMealThumb} className="w-14 h-14 rounded-lg object-cover flex-shrink-0" />
+                                            <div className="min-w-0">
+                                                <h4 className="text-sm font-bold text-white leading-tight truncate">{meal.strMeal}</h4>
+                                                <p className="text-[10px] text-gold uppercase tracking-wide mt-0.5">{meal.strCategory}</p>
+                                                <div className="flex items-center gap-2 mt-1.5">
+                                                    <span className="text-[10px] text-gray-500">{stats.prepTime}m</span>
+                                                    <span className="text-[10px] text-gray-500">{stats.calories} kcal</span>
+                                                    {fb && <span className="text-[10px] text-gold">★ {fb.rating}</span>}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Insights */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="card p-5 text-center">
+                            <h4 className="text-gold font-bold text-sm mb-2">Pattern Identification</h4>
+                            <p className="text-gray-400 text-sm italic leading-relaxed">
+                                {improvisedMeals.length > 0
+                                    ? `"${improvisedMeals[0].strCategory}" dishes are showing strong improvisation patterns. Consider featuring them more prominently.`
+                                    : '"Dishes in the Seafood category generally receive 15% higher feedback margins on weekends."'}
+                            </p>
+                        </div>
+                        <div className="card p-5 text-center">
+                            <h4 className="text-white font-bold text-sm mb-2">Operational Insight</h4>
+                            <p className="text-gray-400 text-sm italic leading-relaxed">
+                                {allTracked.length > 0
+                                    ? `You have tracked ${allTracked.length} dish${allTracked.length > 1 ? 'es' : ''} with an average performance of ${avgRating}/5. Keep improvising!`
+                                    : '"Prep times exceeding 45 minutes correlate with lower kitchen efficiency during Friday rush."'}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        /* ── FOOTER ────────────────────────────────────────── */
         const Footer = () => (
-            <footer className="bg-charcoal text-white pt-12 pb-8 mt-20 border-t border-gold/20">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400">
-                    <p>&copy; {new Date().getFullYear()} L'Atelier Management Inc.</p>
+            <footer className="border-t border-gray-800/60 py-5 mt-16">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center text-[11px] text-gray-600 gap-1">
+                    <p>© {new Date().getFullYear()} L'Atelier Management Inc.</p>
                     <p>Designed for Executive Precision.</p>
                 </div>
             </footer>
         );
 
-        /* --- MAIN APP --- */
+        /* ═══════════════════════════════════════════════════
+           APP PROVIDER
+        ═══════════════════════════════════════════════════ */
+        const AppProvider = ({ children }) => {
+            const [inventory, setInventory] = useLocalStorage('latelier_inventory', [
+                { id: 1, name: 'Saffron Threads', quantity: '10g', low: false },
+                { id: 2, name: 'Truffle Oil', quantity: '500ml', low: true }
+            ]);
+            const [savedRecipes, setSavedRecipes] = useLocalStorage('latelier_saved_recipes', []);
+            const [feedbacks, setFeedbacks] = useLocalStorage('latelier_feedbacks', {});
+            const [improvisedMeals, setImprovisedMeals] = useLocalStorage('latelier_improvised', []);
+            const [viewMeal, setViewMeal] = useState(null);
+
+            return (
+                <AppContext.Provider value={{
+                    inventory, setInventory,
+                    savedRecipes, setSavedRecipes,
+                    feedbacks, setFeedbacks,
+                    improvisedMeals, setImprovisedMeals,
+                    viewMeal, setViewMeal
+                }}>
+                    {children}
+                </AppContext.Provider>
+            );
+        };
+
+        /* ═══════════════════════════════════════════════════
+           MAIN APP
+        ═══════════════════════════════════════════════════ */
         const App = () => {
-            const [isLoading, setIsLoading] = useState(true);
-            const [currentView, setCurrentView] = useState('dashboard'); // dashboard, generator, menu, inventory, optimizer
+            const [loading, setLoading] = useState(true);
+            const [view, setView] = useState('dashboard');
 
             useEffect(() => {
-                const timer = setTimeout(() => { setIsLoading(false); }, 1500);
-                return () => clearTimeout(timer);
+                const t = setTimeout(() => setLoading(false), 1400);
+                return () => clearTimeout(t);
             }, []);
 
-            if (isLoading) return <LoadingScreen />;
+            if (loading) return <LoadingScreen />;
 
             return (
                 <AppProvider>
-                    <div className="min-h-screen font-sans bg-[#fbf9f6] flex flex-col">
-                        <Header currentView={currentView} setCurrentView={setCurrentView} />
-                        <main className="pt-32 pb-10 flex-grow">
-                            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[60vh]">
-                                {currentView === 'dashboard' && <DashboardView setCurrentView={setCurrentView} />}
-                                {currentView === 'generator' && <AIGeneratorView />}
-                                {currentView === 'menu' && <MenuAnalyzerView />}
-                                {currentView === 'inventory' && <InventoryManagerView setCurrentView={setCurrentView} />}
-                                {currentView === 'optimizer' && <RecipeOptimizerView />}
+                    <div className="min-h-screen flex flex-col bg-[#111111]">
+                        <Header current={view} nav={setView} />
+                        <RecipeModal />
+                        <main className="flex-grow pt-24 pb-8">
+                            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[70vh]">
+                                {view === 'dashboard'  && <DashboardView nav={setView} />}
+                                {view === 'generator'  && <AIGeneratorView />}
+                                {view === 'menu'       && <MenuView />}
+                                {view === 'inventory'  && <InventoryView nav={setView} />}
+                                {view === 'optimizer'  && <OptimizerView />}
+                                {view === 'planner'    && <PlannerView />}
+                                {view === 'analytics'  && <AnalyticsView />}
                             </div>
                         </main>
                         <Footer />
@@ -804,20 +1271,8 @@
             );
         };
 
-        const AppProvider = ({ children }) => {
-            const [inventory, setInventory] = useLocalStorage('latelier_inventory', [
-                { id: 1, name: 'Saffron Threads', quantity: '10g', low: false },
-                { id: 2, name: 'Truffle Oil', quantity: '500ml', low: true }
-            ]);
-            const [savedRecipes, setSavedRecipes] = useLocalStorage('latelier_saved_recipes', []);
-            const [feedbacks, setFeedbacks] = useLocalStorage('latelier_feedbacks', {});
-
-            return <AppContext.Provider value={{ inventory, setInventory, savedRecipes, setSavedRecipes, feedbacks, setFeedbacks }}>{children}</AppContext.Provider>;
-        };
-
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
     </script>
 </body>
-
 </html>
