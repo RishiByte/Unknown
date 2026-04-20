@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>L'Atelier | Culinary Management</title>
-    
+
     <!-- React & ReactDOM -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    
+
     <!-- Babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -41,7 +42,9 @@
         }
     </script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -51,28 +54,33 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
+
         .glass-nav {
             background: rgba(26, 26, 26, 0.95);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(212, 175, 55, 0.1);
         }
+
         .glass-card {
             background: white;
             border: 1px solid rgba(212, 175, 55, 0.15);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         .glass-card-no-hover {
             background: white;
             border: 1px solid rgba(212, 175, 55, 0.15);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
+
         .hover-lift:hover {
             transform: translateY(-6px);
             box-shadow: 0 20px 25px -5px rgba(212, 175, 55, 0.15), 0 8px 10px -6px rgba(212, 175, 55, 0.1);
             border-color: rgba(212, 175, 55, 0.4);
         }
+
         .gold-gradient-text {
             background: linear-gradient(135deg, #d4af37, #f3e5ab, #d4af37);
             -webkit-background-clip: text;
@@ -81,18 +89,38 @@
             background-size: 200% auto;
             animation: shine 5s linear infinite;
         }
+
         @keyframes shine {
-            to { background-position: 200% center; }
+            to {
+                background-position: 200% center;
+            }
         }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f5f1e8; }
-        ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #b08d27; }
-        input:focus, textarea:focus, select:focus {
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f5f1e8;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #d4af37;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b08d27;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
             outline: none;
             box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
             border-color: #d4af37;
         }
+
         .spinner {
             border: 4px solid rgba(212, 175, 55, 0.3);
             border-radius: 50%;
@@ -101,9 +129,19 @@
             height: 40px;
             animation: spin 1s linear infinite;
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
+
 <body>
     <div id="root"></div>
 
@@ -194,7 +232,7 @@
                         </nav>
                         <div className="flex items-center gap-6">
                             <div className="flex items-center gap-3 cursor-pointer pl-4 lg:border-l border-gray-700">
-                                <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Chef&backgroundColor=d4af37" alt="Chef Profile" className="w-9 h-9 rounded-full border-2 border-gold object-cover"/>
+                                <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Chef&backgroundColor=d4af37" alt="Chef Profile" className="w-9 h-9 rounded-full border-2 border-gold object-cover" />
                                 <div className="hidden sm:block">
                                     <p className="text-sm font-medium">Chef Auguste</p>
                                     <p className="text-xs text-gray-400">Executive Chef</p>
@@ -210,7 +248,7 @@
         const RecipeCard = ({ meal, actions = [], showNutrition = false, targetCalories = null }) => {
             const stats = generateMockStats(meal.idMeal);
             const ingredients = getIngredients(meal);
-            
+
             // Score calc for optimizer
             let score = 0;
             if (targetCalories) {
@@ -227,7 +265,7 @@
                     )}
                     <div className="h-48 overflow-hidden relative">
                         <div className="absolute inset-0 bg-charcoal/30 z-10 transition-colors group-hover:bg-transparent"></div>
-                        <img src={meal.strMealThumb} alt={meal.strMeal} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"/>
+                        <img src={meal.strMealThumb} alt={meal.strMeal} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out" />
                         <div className="absolute bottom-4 left-4 z-20 flex gap-2">
                             <span className="px-2 py-1 bg-black/60 backdrop-blur rounded text-xs text-white font-medium shadow-md">
                                 {stats.difficulty}
@@ -240,14 +278,14 @@
                     <div className="p-5 flex flex-col flex-grow bg-white">
                         <h4 className="font-serif text-xl font-bold text-charcoal mb-2 line-clamp-1">{meal.strMeal}</h4>
                         <p className="text-xs text-gold font-medium mb-3 uppercase tracking-wider">{meal.strCategory} &bull; {meal.strArea}</p>
-                        
+
                         {showNutrition && (
                             <div className="mb-4 grid grid-cols-2 gap-2 text-xs border-y border-gray-100 py-3">
                                 <div><span className="text-gray-500 block">Calories</span><span className="font-bold text-charcoal">{stats.calories} kcal</span></div>
                                 <div><span className="text-gray-500 block">Est. Yield</span><span className="font-bold text-charcoal">4 Servings</span></div>
                             </div>
                         )}
-                        
+
                         <div className="mt-auto pt-4 flex flex-wrap gap-2">
                             {actions.map((action, idx) => (
                                 <button key={idx} onClick={() => action.onClick(meal)} className={`flex-1 min-w-[120px] py-2 px-3 rounded-lg text-sm font-semibold transition-all ${action.primary ? 'bg-charcoal text-gold hover:bg-black' : 'bg-cream text-charcoal hover:bg-gold/20'}`}>
@@ -263,12 +301,12 @@
         /* --- View: Dashboard --- */
         const DashboardView = ({ setCurrentView }) => {
             const { inventory, savedRecipes, feedbacks } = useContext(AppContext);
-            
+
             // Calculate fake efficiency trend based on saved recipes
             const efficiency = Math.min(100, 80 + savedRecipes.length * 2);
-            
+
             // Aggregate feedback
-            const avgRating = Object.values(feedbacks).length > 0 
+            const avgRating = Object.values(feedbacks).length > 0
                 ? (Object.values(feedbacks).reduce((acc, curr) => acc + curr.rating, 0) / Object.values(feedbacks).length).toFixed(1)
                 : 'N/A';
 
@@ -284,7 +322,7 @@
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                        <div className="glass-card rounded-2xl p-6 flex flex-col justify-between animate-slide-up" style={{animationDelay: '0.1s'}}>
+                        <div className="glass-card rounded-2xl p-6 flex flex-col justify-between animate-slide-up" style={{ animationDelay: '0.1s' }}>
                             <div className="flex justify-between items-start">
                                 <div>
                                     <p className="text-sm text-gray-500 font-medium mb-1 uppercase">Active Inventory</p>
@@ -293,7 +331,7 @@
                                 <div className="p-3 bg-cream rounded-full border border-gold/30"><i className="fa-solid fa-boxes-stacked text-gold"></i></div>
                             </div>
                         </div>
-                        <div className="glass-card rounded-2xl p-6 flex flex-col justify-between animate-slide-up" style={{animationDelay: '0.2s'}}>
+                        <div className="glass-card rounded-2xl p-6 flex flex-col justify-between animate-slide-up" style={{ animationDelay: '0.2s' }}>
                             <div className="flex justify-between items-start">
                                 <div>
                                     <p className="text-sm text-gray-500 font-medium mb-1 uppercase">Saved Recipes</p>
@@ -302,7 +340,7 @@
                                 <div className="p-3 bg-cream rounded-full border border-gold/30"><i className="fa-solid fa-book-open text-gold"></i></div>
                             </div>
                         </div>
-                        <div className="glass-card rounded-2xl p-6 flex flex-col justify-between animate-slide-up" style={{animationDelay: '0.3s'}}>
+                        <div className="glass-card rounded-2xl p-6 flex flex-col justify-between animate-slide-up" style={{ animationDelay: '0.3s' }}>
                             <div className="flex justify-between items-start">
                                 <div>
                                     <p className="text-sm text-gray-500 font-medium mb-1 uppercase">Avg Feedback</p>
@@ -311,7 +349,7 @@
                                 <div className="p-3 bg-cream rounded-full border border-gold/30"><i className="fa-solid fa-comment-dots text-gold"></i></div>
                             </div>
                         </div>
-                        <div className="glass-card rounded-2xl p-6 flex flex-col justify-between animate-slide-up" style={{animationDelay: '0.4s'}}>
+                        <div className="glass-card rounded-2xl p-6 flex flex-col justify-between animate-slide-up" style={{ animationDelay: '0.4s' }}>
                             <div className="flex justify-between items-start">
                                 <div>
                                     <p className="text-sm text-gray-500 font-medium mb-1 uppercase">Resource Effic.</p>
@@ -322,14 +360,14 @@
                         </div>
                     </div>
 
-                    <div className="flex justify-between items-end mb-8 animate-fade-in" style={{animationDelay: '0.5s'}}>
+                    <div className="flex justify-between items-end mb-8 animate-fade-in" style={{ animationDelay: '0.5s' }}>
                         <h2 className="font-serif text-2xl text-charcoal font-semibold border-l-4 border-gold pl-4">Core Stations</h2>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                        <div onClick={() => setCurrentView('generator')} className="glass-card rounded-2xl overflow-hidden group hover-lift cursor-pointer flex flex-col animate-slide-up" style={{animationDelay: '0.6s'}}>
+                        <div onClick={() => setCurrentView('generator')} className="glass-card rounded-2xl overflow-hidden group hover-lift cursor-pointer flex flex-col animate-slide-up" style={{ animationDelay: '0.6s' }}>
                             <div className="h-40 relative bg-charcoal">
-                                <img src="https://images.unsplash.com/photo-1577106263724-2c8e03bfe9cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-500"/>
+                                <img src="https://images.unsplash.com/photo-1577106263724-2c8e03bfe9cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
                                 <div className="absolute top-4 left-4 z-20 w-10 h-10 rounded-full bg-white flex items-center justify-center"><i className="fa-solid fa-wand-magic-sparkles text-gold"></i></div>
                             </div>
                             <div className="p-6 bg-white flex-1">
@@ -338,9 +376,9 @@
                             </div>
                         </div>
 
-                        <div onClick={() => setCurrentView('menu')} className="glass-card rounded-2xl overflow-hidden group hover-lift cursor-pointer flex flex-col animate-slide-up" style={{animationDelay: '0.7s'}}>
+                        <div onClick={() => setCurrentView('menu')} className="glass-card rounded-2xl overflow-hidden group hover-lift cursor-pointer flex flex-col animate-slide-up" style={{ animationDelay: '0.7s' }}>
                             <div className="h-40 relative bg-charcoal">
-                                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-500"/>
+                                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
                                 <div className="absolute top-4 left-4 z-20 w-10 h-10 rounded-full bg-white flex items-center justify-center"><i className="fa-solid fa-layer-group text-gold"></i></div>
                             </div>
                             <div className="p-6 bg-white flex-1">
@@ -349,9 +387,9 @@
                             </div>
                         </div>
 
-                        <div onClick={() => setCurrentView('inventory')} className="glass-card rounded-2xl overflow-hidden group hover-lift cursor-pointer flex flex-col animate-slide-up" style={{animationDelay: '0.8s'}}>
+                        <div onClick={() => setCurrentView('inventory')} className="glass-card rounded-2xl overflow-hidden group hover-lift cursor-pointer flex flex-col animate-slide-up" style={{ animationDelay: '0.8s' }}>
                             <div className="h-40 relative bg-charcoal">
-                                <img src="https://images.unsplash.com/photo-1589010588553-46e8e7c21788?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-500"/>
+                                <img src="https://images.unsplash.com/photo-1589010588553-46e8e7c21788?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
                                 <div className="absolute top-4 left-4 z-20 w-10 h-10 rounded-full bg-white flex items-center justify-center"><i className="fa-solid fa-box-open text-gold"></i></div>
                             </div>
                             <div className="p-6 bg-white flex-1">
@@ -360,9 +398,9 @@
                             </div>
                         </div>
 
-                        <div onClick={() => setCurrentView('optimizer')} className="glass-card rounded-2xl overflow-hidden group hover-lift cursor-pointer flex flex-col animate-slide-up" style={{animationDelay: '0.9s'}}>
+                        <div onClick={() => setCurrentView('optimizer')} className="glass-card rounded-2xl overflow-hidden group hover-lift cursor-pointer flex flex-col animate-slide-up" style={{ animationDelay: '0.9s' }}>
                             <div className="h-40 relative bg-charcoal">
-                                <img src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-500"/>
+                                <img src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
                                 <div className="absolute top-4 left-4 z-20 w-10 h-10 rounded-full bg-white flex items-center justify-center"><i className="fa-solid fa-scale-balanced text-gold"></i></div>
                             </div>
                             <div className="p-6 bg-white flex-1">
@@ -429,8 +467,8 @@
                         <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
                             <i className="fa-solid fa-wand-sparkles text-gold text-lg"></i>
                         </div>
-                        <input 
-                            type="text" 
+                        <input
+                            type="text"
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
                             placeholder="E.g., Chicken, Pasta, Spicy, Vegan..."
@@ -449,9 +487,9 @@
                             <div className="col-span-3 text-center py-10 text-red-400">No divine inspiration found for that query. Try broader strokes.</div>
                         )}
                         {!loading && results.map(meal => (
-                            <RecipeCard 
-                                key={meal.idMeal} 
-                                meal={meal} 
+                            <RecipeCard
+                                key={meal.idMeal}
+                                meal={meal}
                                 actions={[
                                     { label: 'Save', icon: 'fa-regular fa-bookmark', onClick: handleSave, primary: true },
                                     { label: improviseMode?.idMeal === meal.idMeal ? 'Thinking...' : 'Improvise', icon: 'fa-solid fa-lightbulb', onClick: triggerImprovise }
@@ -498,10 +536,10 @@
                                 <p className="text-gray-400 italic col-span-2">Menu is empty. Save recipes from the generator first.</p>
                             ) : (
                                 savedRecipes.map(meal => (
-                                    <div key={meal.idMeal} 
-                                         className={`glass-card-no-hover p-4 flex gap-4 cursor-pointer transition-colors ${selectedMealId === meal.idMeal ? 'border-gold bg-gold/5' : 'hover:border-gold/50'}`}
-                                         onClick={() => setSelectedMealId(meal.idMeal)}>
-                                        <img src={meal.strMealThumb} className="w-16 h-16 rounded object-cover shadow-sm"/>
+                                    <div key={meal.idMeal}
+                                        className={`glass-card-no-hover p-4 flex gap-4 cursor-pointer transition-colors ${selectedMealId === meal.idMeal ? 'border-gold bg-gold/5' : 'hover:border-gold/50'}`}
+                                        onClick={() => setSelectedMealId(meal.idMeal)}>
+                                        <img src={meal.strMealThumb} className="w-16 h-16 rounded object-cover shadow-sm" />
                                         <div>
                                             <h5 className="font-serif font-bold text-charcoal line-clamp-1">{meal.strMeal}</h5>
                                             <div className="text-gold text-xs mt-1">
@@ -514,25 +552,25 @@
                             )}
                         </div>
                     </div>
-                    
+
                     <div className="glass-card-no-hover rounded-2xl p-6 bg-white self-start sticky top-24">
                         <h3 className="font-serif text-xl border-b border-gray-100 pb-3 mb-4">Feedback Engine</h3>
                         {!selectedMealId ? (
                             <p className="text-sm text-gray-500">Select a dish from the menu to analyze or submit feedback.</p>
                         ) : (
                             <div>
-                                <h4 className="font-bold text-charcoal mb-4">{savedRecipes.find(r=>r.idMeal===selectedMealId)?.strMeal}</h4>
+                                <h4 className="font-bold text-charcoal mb-4">{savedRecipes.find(r => r.idMeal === selectedMealId)?.strMeal}</h4>
                                 <div className="mb-4">
                                     <label className="block text-xs uppercase text-gray-500 font-bold mb-2">Guest Rating (1-5)</label>
-                                    <input type="range" min="1" max="5" value={ratingInput} onChange={e=>setRatingInput(Number(e.target.value))} className="w-full accent-gold"/>
+                                    <input type="range" min="1" max="5" value={ratingInput} onChange={e => setRatingInput(Number(e.target.value))} className="w-full accent-gold" />
                                     <div className="text-center font-bold text-gold mt-2 text-lg">{ratingInput} Stars</div>
                                 </div>
                                 <div className="mb-4">
                                     <label className="block text-xs uppercase text-gray-500 font-bold mb-2">Tasting Notes</label>
-                                    <textarea value={commentInput} onChange={e=>setCommentInput(e.target.value)} rows="3" className="w-full border border-gray-300 rounded p-2 text-sm bg-gray-50" placeholder="e.g. Needs more salt, exceptional plating..."></textarea>
+                                    <textarea value={commentInput} onChange={e => setCommentInput(e.target.value)} rows="3" className="w-full border border-gray-300 rounded p-2 text-sm bg-gray-50" placeholder="e.g. Needs more salt, exceptional plating..."></textarea>
                                 </div>
                                 <button onClick={handleAddFeedback} className="w-full bg-charcoal text-white font-bold py-3 rounded-lg hover:bg-gold transition-colors">Commit Feedback</button>
-                                
+
                                 {feedbacks[selectedMealId]?.comments?.length > 0 && (
                                     <div className="mt-6 pt-4 border-t border-gray-100">
                                         <h5 className="text-xs font-bold text-gray-500 uppercase mb-3">Recent Comments</h5>
@@ -555,7 +593,7 @@
             const { inventory, setInventory } = useContext(AppContext);
             const [newItemName, setNewItemName] = useState('');
             const [newItemQty, setNewItemQty] = useState('');
-            
+
             const handleAddItem = (e) => {
                 e.preventDefault();
                 if (!newItemName || !newItemQty) return;
@@ -616,11 +654,11 @@
                         <form onSubmit={handleAddItem}>
                             <div className="mb-4">
                                 <label className="block text-xs uppercase text-gray-500 font-bold mb-2">Item Name</label>
-                                <input type="text" value={newItemName} onChange={e=>setNewItemName(e.target.value)} required className="w-full border border-gray-300 rounded p-2 text-sm bg-gray-50" placeholder="e.g. Saffron Threads"/>
+                                <input type="text" value={newItemName} onChange={e => setNewItemName(e.target.value)} required className="w-full border border-gray-300 rounded p-2 text-sm bg-gray-50" placeholder="e.g. Saffron Threads" />
                             </div>
                             <div className="mb-6">
                                 <label className="block text-xs uppercase text-gray-500 font-bold mb-2">Quantity & Measure</label>
-                                <input type="text" value={newItemQty} onChange={e=>setNewItemQty(e.target.value)} required className="w-full border border-gray-300 rounded p-2 text-sm bg-gray-50" placeholder="e.g. 500g, 2 cases"/>
+                                <input type="text" value={newItemQty} onChange={e => setNewItemQty(e.target.value)} required className="w-full border border-gray-300 rounded p-2 text-sm bg-gray-50" placeholder="e.g. 500g, 2 cases" />
                             </div>
                             <button type="submit" className="w-full bg-gold text-charcoal font-bold py-3 rounded-lg hover:bg-yellow-500 shadow-md transition-all">Add to Manifest</button>
                         </form>
@@ -662,11 +700,11 @@
                     <div className="bg-charcoal text-white rounded-2xl p-6 mb-10 shadow-lg flex flex-col md:flex-row gap-6 items-end">
                         <div className="flex-1 w-full">
                             <label className="block text-xs uppercase text-gold font-bold mb-2">Target Recipe Type / Ingredient</label>
-                            <input type="text" value={query} onChange={e=>setQuery(e.target.value)} placeholder="e.g. Salmon" className="w-full bg-white/10 border border-gray-600 focus:border-gold rounded p-3 text-white placeholder-gray-400"/>
+                            <input type="text" value={query} onChange={e => setQuery(e.target.value)} placeholder="e.g. Salmon" className="w-full bg-white/10 border border-gray-600 focus:border-gold rounded p-3 text-white placeholder-gray-400" />
                         </div>
                         <div className="flex-1 w-full">
                             <label className="block text-xs uppercase text-gold font-bold mb-2">Dietary Target (Calories: {calories})</label>
-                            <input type="range" min="300" max="1200" step="50" value={calories} onChange={e=>setCalories(Number(e.target.value))} className="w-full accent-gold mt-2"/>
+                            <input type="range" min="300" max="1200" step="50" value={calories} onChange={e => setCalories(Number(e.target.value))} className="w-full accent-gold mt-2" />
                             <div className="flex justify-between text-xs text-gray-400 mt-1">
                                 <span>300 kcal (Lean)</span>
                                 <span>1200 kcal (Indulgent)</span>
@@ -677,9 +715,9 @@
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {loading && <div className="col-span-full text-center py-10 text-gray-500">Calculating nutrition density matrices...</div>}
                         {!loading && results.map(meal => (
-                            <RecipeCard 
-                                key={meal.idMeal} 
-                                meal={meal} 
+                            <RecipeCard
+                                key={meal.idMeal}
+                                meal={meal}
                                 showNutrition={true}
                                 targetCalories={calories}
                                 actions={[
@@ -739,7 +777,7 @@
             ]);
             const [savedRecipes, setSavedRecipes] = useLocalStorage('latelier_saved_recipes', []);
             const [feedbacks, setFeedbacks] = useLocalStorage('latelier_feedbacks', {});
-            
+
             return <AppContext.Provider value={{ inventory, setInventory, savedRecipes, setSavedRecipes, feedbacks, setFeedbacks }}>{children}</AppContext.Provider>;
         };
 
@@ -747,4 +785,5 @@
         root.render(<App />);
     </script>
 </body>
+
 </html>

@@ -1,0 +1,80 @@
+/* Glassmorphism utilities */
+.glass-nav {
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.glass-card {
+    background: white;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .glass-card {
+    background: #2a2a2a;
+    border-color: rgba(212, 175, 55, 0.1);
+}
+
+.glass-card-no-hover {
+    background: white;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.dark .glass-card-no-hover {
+    background: #2a2a2a;
+    border-color: rgba(212, 175, 55, 0.1);
+}
+
+.hover-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 25px -5px rgba(212, 175, 55, 0.15), 0 8px 10px -6px rgba(212, 175, 55, 0.1);
+    border-color: rgba(212, 175, 55, 0.4);
+}
+
+/* Gold text gradient */
+.gold-gradient-text {
+    background: linear-gradient(135deg, #d4af37, #f3e5ab, #d4af37);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: shine 5s linear infinite;
+}
+
+@keyframes shine {
+    to { background-position: 200% center; }
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: inherit; }
+::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #b08d27; }
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
+    border-color: #d4af37;
+}
+
+.spinner {
+    border: 4px solid rgba(212, 175, 55, 0.3);
+    border-radius: 50%;
+    border-top: 4px solid #d4af37;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* Print styling */
+@media print {
+    body * { display: none; }
+    .print-friendly, .print-friendly * { display: block; }
+    .print-friendly { position: absolute; left: 0; top: 0; }
+    .no-print { display: none !important; }
+}
